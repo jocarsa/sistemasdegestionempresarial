@@ -1,0 +1,22 @@
+[
+  {
+    "nombre":"Juan",
+    "apellidos":"Lopez",
+    "email":"info@juan.com"
+  },
+  {
+    "nombre":"Jorge",
+    "apellidos":"Lopez",
+    "email":"info@jorge.com"
+  },
+  {
+    "nombre":"Jose Luis",
+    "apellidos":"Martinez",
+    "email":"info@joseluis.com"
+  },
+  {
+    "nombre":"Julia",
+    "apellidos":"Garcia",
+    "email":"info@julia.com"
+  }
+]

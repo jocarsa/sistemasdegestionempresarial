@@ -1,0 +1,122 @@
+<html>
+  <head> 
+    <style>
+      <style>
+  /* Base */
+  :root{
+    --bg:#f6f7fb;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --accent:#2563eb10; /* faint blue */
+  }
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--text);
+    font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+  }
+  body{
+    padding:32px;
+  }
+
+  /* Table */
+  table{
+    width:100%;
+    max-width:1000px;
+    margin:0 auto;
+    background:var(--card);
+    border-radius:12px;
+    border:1px solid var(--line);
+    /* for rounded corners with tables */
+    border-collapse:separate;
+    border-spacing:0;
+    box-shadow:0 6px 20px rgba(0,0,0,.06);
+    overflow:hidden;
+  }
+
+  thead th{
+    position:sticky;
+    top:0;
+    background:linear-gradient(#fafbff,#f3f5fb);
+    color:#374151;
+    font-weight:600;
+    letter-spacing:.02em;
+  }
+
+  th, td{
+    padding:14px 16px;
+    text-align:left;
+    border-bottom:1px solid var(--line);
+    vertical-align:middle;
+  }
+
+  /* Zebra rows */
+  tbody tr:nth-child(even){
+    background:#fafbff;
+  }
+
+  /* Hover state */
+  tbody tr:hover{
+    background:var(--accent);
+  }
+
+  /* First/last cell rounding fix */
+  thead tr:first-child th:first-child { border-top-left-radius:12px; }
+  thead tr:first-child th:last-child  { border-top-right-radius:12px; }
+  tbody tr:last-child td:first-child  { border-bottom-left-radius:12px; }
+  tbody tr:last-child td:last-child   { border-bottom-right-radius:12px; }
+
+  /* Make long text behave nicely */
+  td, th{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  /* Responsive: allow horizontal scroll on very small screens */
+  @media (max-width: 640px){
+    body{ padding:16px; }
+    table{ display:block; overflow-x:auto; }
+    th, td{ padding:12px 14px; }
+  }
+</style>
+
+    </style>
+  </head>
+  <body>
+    <table>
+      
+    </table>
+  </body>
+  <script>
+    fetch("clientes.json")      // Me traigo el json a Javascript
+    .then(function(respuesta){  // Y una vez que venga
+      return respuesta.json()   // Intepretalo como JSON
+    })
+    .then(function(datos){      // Y entonces
+      console.log(datos)        // Lanzalo a la consola
+      
+      // Ahora voy a recorrer uno a uno los elementos del array
+      // Primero selecciono la tabla desde el HTML
+      var tabla = document.querySelector("table")
+      // Ahora inicializo un contenido (de momento no vale nada)
+      var contenido = "<tr><th>Nombre</th><th>Apellido</th><th>Email</th></tr>";
+      // Para cada uno de los clientes que han venido del json
+      datos.forEach(function(cliente){
+        // Arranco una fila HTML
+        contenido += "<tr>";
+        // Para cada propiedad del objeto
+        for (let propiedad in cliente) {
+          // Pinto la propiedad en una celda
+          contenido += "<td>"+cliente[propiedad]+"</td>";
+        }
+        // Cierro una fila HTML
+        contenido += "</tr>";
+      })
+      tabla.innerHTML = contenido;
+    })
+  </script>
+</html>

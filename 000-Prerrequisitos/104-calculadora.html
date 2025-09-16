@@ -1,0 +1,25 @@
+<html>
+  <body>
+    <input type="text" id="operando1">
+    <input type="text" id="operando2">
+    <button>Calcula</button>
+    <input type="text" id="resultado">
+  </body>
+  <script>
+    // Cuando pulse el boton
+    // Primero selecciono el boton y lo meto en una variable
+    var boton = document.querySelector("button");
+    // Cuando pulse el botón
+    boton.onclick = function(){
+      // Cogeré el valor de operando 1
+         var operando1 = document.querySelector("#operando1").value 
+      // Cogeré el valor de operando 2
+         var operando2 = document.querySelector("#operando2").value 
+      // Realizaré un cálculo
+         var resultado = operando1*1 + operando2*1
+      // Mostraré el cálculo en el resultado
+        document.querySelector("#resultado").value = resultado;
+    }
+    
+  </script>
+</html>
