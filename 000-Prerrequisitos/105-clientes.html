@@ -1,90 +1,60 @@
 <html>
   <head> 
     <style>
-      <style>
-  /* Base */
-  :root{
-    --bg:#f6f7fb;
-    --card:#ffffff;
-    --text:#1f2937;
-    --muted:#6b7280;
-    --line:#e5e7eb;
-    --accent:#2563eb10; /* faint blue */
-  }
-  html,body{
-    margin:0;
-    padding:0;
-    background:var(--bg);
-    color:var(--text);
-    font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
-  }
-  body{
-    padding:32px;
-  }
+  
+  body {
+        background: radial-gradient(circle at center, #0a0f1e, #05070d);
+        font-family: "Segoe UI", Roboto, sans-serif;
+        color: #cce7ff;
+        margin: 0;
+        padding: 20px;
+      }
 
-  /* Table */
-  table{
-    width:100%;
-    max-width:1000px;
-    margin:0 auto;
-    background:var(--card);
-    border-radius:12px;
-    border:1px solid var(--line);
-    /* for rounded corners with tables */
-    border-collapse:separate;
-    border-spacing:0;
-    box-shadow:0 6px 20px rgba(0,0,0,.06);
-    overflow:hidden;
-  }
+      table {
+        width: 80%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        background: rgba(10, 20, 40, 0.8);
+        box-shadow: 0 0 20px rgba(0, 150, 255, 0.5);
+        border: 1px solid #0ff;
+        border-radius: 12px;
+        overflow: hidden;
+      }
 
-  thead th{
-    position:sticky;
-    top:0;
-    background:linear-gradient(#fafbff,#f3f5fb);
-    color:#374151;
-    font-weight:600;
-    letter-spacing:.02em;
-  }
+      th, td {
+        padding: 14px 20px;
+        text-align: left;
+      }
 
-  th, td{
-    padding:14px 16px;
-    text-align:left;
-    border-bottom:1px solid var(--line);
-    vertical-align:middle;
-  }
+      th {
+        background: linear-gradient(90deg, #003366, #0055aa);
+        color: #00e5ff;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-bottom: 2px solid #00c3ff;
+      }
 
-  /* Zebra rows */
-  tbody tr:nth-child(even){
-    background:#fafbff;
-  }
+      tr {
+        transition: all 0.3s ease;
+      }
 
-  /* Hover state */
-  tbody tr:hover{
-    background:var(--accent);
-  }
+      tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.05);
+      }
 
-  /* First/last cell rounding fix */
-  thead tr:first-child th:first-child { border-top-left-radius:12px; }
-  thead tr:first-child th:last-child  { border-top-right-radius:12px; }
-  tbody tr:last-child td:first-child  { border-bottom-left-radius:12px; }
-  tbody tr:last-child td:last-child   { border-bottom-right-radius:12px; }
+      td {
+        border-bottom: 1px solid rgba(0, 150, 255, 0.3);
+      }
 
-  /* Make long text behave nicely */
-  td, th{
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-
-  /* Responsive: allow horizontal scroll on very small screens */
-  @media (max-width: 640px){
-    body{ padding:16px; }
-    table{ display:block; overflow-x:auto; }
-    th, td{ padding:12px 14px; }
-  }
-</style>
-
+      tr:hover {
+        background: rgba(0, 200, 255, 0.2);
+        transform: scale(1.02);
+        box-shadow: 0 0 15px rgba(0, 200, 255, 0.7);
+      }
     </style>
+
+   
   </head>
   <body>
     <table>
@@ -103,6 +73,7 @@
       // Primero selecciono la tabla desde el HTML
       var tabla = document.querySelector("table")
       // Ahora inicializo un contenido (de momento no vale nada)
+      // La estreategia consiste en inicializar una cadena, e ir sumando elementos a la cadena
       var contenido = "<tr><th>Nombre</th><th>Apellido</th><th>Email</th></tr>";
       // Para cada uno de los clientes que han venido del json
       datos.forEach(function(cliente){
@@ -116,6 +87,7 @@
         // Cierro una fila HTML
         contenido += "</tr>";
       })
+      // Esta linea selecciona la tabla y realmente le mete el contenido que hemos ido tejiendo
       tabla.innerHTML = contenido;
     })
   </script>
