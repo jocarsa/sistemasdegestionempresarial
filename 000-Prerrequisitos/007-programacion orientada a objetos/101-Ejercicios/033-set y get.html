@@ -1,0 +1,27 @@
+<script>
+  class Gato{
+    constructor(gatocolor,gatonombre,gatocolorojos){
+      this.color = gatocolor
+      this.nombre = gatonombre
+      this.colorojos = gatocolorojos
+    }
+    maulla(){
+      return "miau";
+    }
+    aranya(){
+      return "te araño";
+    }
+    getColor(){
+      return this.color;
+    }
+    setColor(nuevocolor){
+      this.color = nuevocolor;
+    }
+  }
+  
+  var micifu = new Gato("naranja","Micifu","verdes");
+  console.log(micifu)
+  micifu.setColor("verde")
+  console.log(micifu)
+
+</script>

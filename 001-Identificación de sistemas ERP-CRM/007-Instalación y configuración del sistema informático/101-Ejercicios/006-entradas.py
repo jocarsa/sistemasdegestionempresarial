@@ -1,0 +1,2 @@
+input("Introduce tu edad")
+

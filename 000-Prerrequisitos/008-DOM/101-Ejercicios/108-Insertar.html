@@ -1,0 +1,103 @@
+<html>
+  <head> 
+    <style>
+  
+  body {
+        background: radial-gradient(circle at center, #0a0f1e, #05070d);
+        font-family: "Segoe UI", Roboto, sans-serif;
+        color: #cce7ff;
+        margin: 0;
+        padding: 20px;
+      }
+
+      table {
+        width: 80%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        background: rgba(10, 20, 40, 0.8);
+        box-shadow: 0 0 20px rgba(0, 150, 255, 0.5);
+        border: 1px solid #0ff;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      th, td {
+        padding: 14px 20px;
+        text-align: left;
+      }
+
+      th {
+        background: linear-gradient(90deg, #003366, #0055aa);
+        color: #00e5ff;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-bottom: 2px solid #00c3ff;
+      }
+
+      tr {
+        transition: all 0.3s ease;
+      }
+
+      tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      td {
+        border-bottom: 1px solid rgba(0, 150, 255, 0.3);
+      }
+
+      tr:hover {
+        background: rgba(0, 200, 255, 0.2);
+        transform: scale(1.02);
+        box-shadow: 0 0 15px rgba(0, 200, 255, 0.7);
+      }
+    </style>
+
+   <meta charset="utf-8">
+  </head>
+  <body>
+    <table>
+      
+    </table>
+  </body>
+  <script>
+    fetch("clientes.json")      // Me traigo el json a Javascript
+    .then(function(respuesta){  // Y una vez que venga
+      return respuesta.json()   // Intepretalo como JSON
+    })
+    .then(function(datos){      // Y entonces
+      console.log(datos)        // Lanzalo a la consola
+      
+      // Ahora voy a recorrer uno a uno los elementos del array
+      // Primero selecciono la tabla desde el HTML
+      var tabla = document.querySelector("table")
+      // Ahora inicializo un contenido (de momento no vale nada)
+      // La estreategia consiste en inicializar una cadena, e ir sumando elementos a la cadena
+      var contenido = "<tr><th>Nombre</th><th>Apellido</th><th>Email</th></tr>";
+      // Para cada uno de los clientes que han venido del json
+      datos.forEach(function(cliente){
+        // Arranco una fila HTML
+        contenido += "<tr>";
+        // Para cada propiedad del objeto
+        for (let propiedad in cliente) {
+          // Pinto la propiedad en una celda
+          contenido += "<td>"+cliente[propiedad]+"</td>";
+        }
+        // Cierro una fila HTML
+        contenido += '<td>🖍 ❌ </td>'
+        contenido += "</tr>";
+      })
+      contenido += `
+         <tr>
+          <td><input type="text" placeholder="Nombre del cliente"></td>
+          <td><input type="text" placeholder="Apellidos del cliente"></td>
+          <td><input type="text" placeholder="Email del cliente"></td>
+          <td><button>Crear</button></td>
+         </tr>
+      `
+      // Esta linea selecciona la tabla y realmente le mete el contenido que hemos ido tejiendo
+      tabla.innerHTML = contenido;
+    })
+  </script>
+</html>

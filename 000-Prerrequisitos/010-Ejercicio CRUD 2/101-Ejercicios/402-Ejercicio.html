@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div id="formulario">
+      <input type="text" id="nombre" placeholder="Introduce el nombre">
+      <input type="text" id="email" placeholder="Introduce el email">
+      <button>Añadir</button> 
+    </div>
+    <table>
+    </table>
+    <script>
+        // Creo un array vacio
+        let clientes = [];
+        /////////////////// CREATE ///////////////////////////
+        
+        // Selecciono el boton
+        let boton = document.querySelector("button")
+        // Accion de pulsar en el boton
+        boton.onclick = function(){
+          // Atrapo el nombre
+          let nombre = document.querySelector("#nombre").value
+          // Atrapo el email
+          let email = document.querySelector("#email").value
+          // Añado el cliente actual al array
+          clientes.push({"nombre":nombre,"email":email})
+          // Lo saco por consola
+          console.log(clientes)
+          // Borramos los campos
+          document.querySelector("#nombre").value = ""
+          document.querySelector("#email").value = ""
+        }
+        
+        /////////////////// READ ///////////////////////////
+        
+        
+        
+    </script>
+  </body>
+</html>
