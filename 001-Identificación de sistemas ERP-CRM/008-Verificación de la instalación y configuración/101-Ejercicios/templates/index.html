@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <h3>Nuevo cliente</h3>
+    <form method="post">
+      <input name="nombre" placeholder="Nombre" required>
+      <input name="apellidos" placeholder="Apellidos" required>
+      <input name="email" type="email" placeholder="Email" required>
+      <input name="telefono" placeholder="Teléfono">
+      <input name="dni" placeholder="DNI" required>
+      <input name="fecha_nacimiento" type="date">
+      <button>Guardar</button>
+    </form>
+
+    <h3>Listado</h3>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Nombre</th><th>Apellidos</th><th>Email</th>
+        <th>Teléfono</th><th>DNI</th><th>Fecha nac.</th>
+      </tr>
+      {% for r in filas %}
+        <tr>
+          <td>{{ r['nombre'] }}</td>
+          <td>{{ r['apellidos'] }}</td>
+          <td>{{ r['email'] }}</td>
+          <td>{{ r['telefono'] }}</td>
+          <td>{{ r['dni'] }}</td>
+          <td>{{ r['fecha_nacimiento'] or '' }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
+

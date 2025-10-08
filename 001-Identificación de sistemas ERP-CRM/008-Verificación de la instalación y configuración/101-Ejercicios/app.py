@@ -26,6 +26,7 @@ if not os.path.exists(DB):
 def index():
     if request.method == "POST":
       # Si el método es post, inserta nuevo cliente
+      # Esta es la estructura que RECIBE los datos
         f = request.form
         db("INSERT INTO clientes(nombre,apellidos,email,telefono,dni,fecha_nacimiento) VALUES(?,?,?,?,?,?)",
            (f["nombre"], f["apellidos"], f["email"], f.get("telefono",""), f["dni"], f.get("fecha_nacimiento","")))
@@ -39,6 +40,7 @@ def index():
 <title>Clientes</title>
 <h3>Nuevo cliente</h3>
 <form method=post>
+<!-- Este es el formulario que ENVIA los datos -->
   <input name=nombre placeholder=Nombre required>
   <input name=apellidos placeholder=Apellidos required>
   <input name=email type=email placeholder=Email required>
