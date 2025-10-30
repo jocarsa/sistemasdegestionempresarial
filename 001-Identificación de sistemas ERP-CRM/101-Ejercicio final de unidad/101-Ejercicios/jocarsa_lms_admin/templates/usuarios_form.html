@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Nuevo usuario</h2>
+<form method="post" class="form-grid">
+  <label>Usuario
+    <input type="text" name="username" required>
+  </label>
+  <label>Contraseña
+    <input type="password" name="password" required>
+  </label>
+  <label>Rol
+    <select name="role">
+      <option value="admin">admin</option>
+      <option value="editor">editor</option>
+    </select>
+  </label>
+  <button class="btn">Guardar</button>
+</form>
+{% endblock %}

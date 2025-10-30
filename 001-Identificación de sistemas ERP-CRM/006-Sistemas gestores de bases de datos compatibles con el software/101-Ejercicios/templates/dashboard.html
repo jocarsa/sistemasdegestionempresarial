@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Gestión</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <div class="header-content">
+                <h1>Sistema de Gestión Empresarial</h1>
+                <div class="user-menu">
+                    <span>Bienvenido, {{ g.user.username }}</span>
+                    <a href="{{ url_for('logout') }}" class="btn-logout">Cerrar Sesión</a>
+                </div>
+            </div>
+        </header>
+        
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('dashboard') }}" class="nav-link active">Dashboard</a></li>
+                <li><a href="{{ url_for('clientes') }}" class="nav-link">Gestión de Clientes</a></li>
+                <li><a href="{{ url_for('productos') }}" class="nav-link">Gestión de Productos</a></li>
+                <li><a href="{{ url_for('pedidos') }}" class="nav-link">Gestión de Pedidos</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main-content">
+            <div class="welcome-section">
+                <h2>Bienvenido al Sistema de Gestión</h2>
+                <p>Selecciona una opción del menú lateral para comenzar</p>
+                
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <h3>Clientes</h3>
+                        <p id="total-clientes">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Productos</h3>
+                        <p id="total-productos">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pedidos</h3>
+                        <p id="total-pedidos">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Ventas Totales</h3>
+                        <p id="total-ventas">€0.00</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script-dashboard.js') }}"></script>
+</body>
+</html>

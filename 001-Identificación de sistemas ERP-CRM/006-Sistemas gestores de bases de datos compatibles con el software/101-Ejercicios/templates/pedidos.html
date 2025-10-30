@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pedidos - Sistema de Gestión</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <div class="header-content">
+                <h1>Sistema de Gestión Empresarial</h1>
+                <div class="user-menu">
+                    <span>Bienvenido, {{ g.user.username }}</span>
+                    <a href="{{ url_for('logout') }}" class="btn-logout">Cerrar Sesión</a>
+                </div>
+            </div>
+        </header>
+        
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a></li>
+                <li><a href="{{ url_for('clientes') }}" class="nav-link">Clientes</a></li>
+                <li><a href="{{ url_for('productos') }}" class="nav-link">Productos</a></li>
+                <li><a href="{{ url_for('pedidos') }}" class="nav-link active">Pedidos</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h2>Gestión de Pedidos</h2>
+                <button class="btn-primary" onclick="abrirModalCrear()">Nuevo Pedido</button>
+            </div>
+            
+            <div class="table-container">
+                <table id="tabla-pedidos">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla">
+                        <!-- Los pedidos se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal para crear/editar pedido -->
+    <div id="modal-pedido" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 id="modal-titulo">Nuevo Pedido</h3>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+            <form id="form-pedido" class="modal-form">
+                <input type="hidden" id="pedido-id">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cliente_id">Cliente *</label>
+                        <select id="cliente_id" required>
+                            <option value="">Seleccionar cliente</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_pedido">Fecha Pedido</label>
+                        <input type="date" id="fecha_pedido">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notas">Notas</label>
+                    <textarea id="notas" rows="2"></textarea>
+                </div>
+                
+                <div class="section-header">
+                    <h4>Líneas del Pedido</h4>
+                    <button type="button" class="btn-secondary" onclick="agregarLinea()">+ Agregar Línea</button>
+                </div>
+                
+                <div id="lineas-pedido" class="lineas-container">
+                    <!-- Las líneas se agregarán aquí dinámicamente -->
+                </div>
+                
+                <div class="total-section">
+                    <strong>Total: €<span id="total-pedido">0.00</span></strong>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar Pedido</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script-pedidos.js') }}"></script>
+</body>
+</html>

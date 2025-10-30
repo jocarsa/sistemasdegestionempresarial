@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Nuevo material</h2>
+<form method="post" class="form-grid">
+  <label>Título
+    <input type="text" name="titulo" required>
+  </label>
+  <label>Descripción
+    <textarea name="descripcion" rows="3"></textarea>
+  </label>
+  <label>URL
+    <input type="url" name="url" placeholder="https://...">
+  </label>
+  <label>Curso
+    <select name="curso_id" required>
+      {% for c in cursos %}
+      <option value="{{ c.id }}">{{ c.nombre }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Asignatura
+    <select name="asignatura_id" required>
+      {% for a in asignaturas %}
+      <option value="{{ a.id }}">{{ a.nombre }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button class="btn">Guardar</button>
+</form>
+{% endblock %}

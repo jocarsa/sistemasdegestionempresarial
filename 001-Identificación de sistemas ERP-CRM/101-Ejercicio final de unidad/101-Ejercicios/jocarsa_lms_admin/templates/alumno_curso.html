@@ -1,0 +1,70 @@
+{% extends "alumno_base.html" %}
+{% block title %}{{ curso.nombre }} — Aula{% endblock %}
+{% block breadcrumbs %}<a href="{{ url_for('alumno_home') }}">Inicio</a> / {{ curso.nombre }}{% endblock %}
+
+{% block content %}
+<h2>{{ curso.nombre }}</h2>
+<p class="muted">{{ curso.descripcion or '' }}</p>
+
+<h3>Asignaturas</h3>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+  {% for a in asignaturas %}
+  <div class="card"><div><b>{{ a.nombre }}</b><div class="muted">{{ a.descripcion or '' }}</div></div></div>
+  {% else %}
+  <div class="card"><div>Este curso no tiene asignaturas configuradas.</div></div>
+  {% endfor %}
+</div>
+
+<h3 style="margin-top:18px;">Materiales</h3>
+<table>
+  <thead><tr><th>Título</th><th>Asignatura</th><th>Fecha</th><th>Enlace</th></tr></thead>
+  <tbody>
+    {% for m in materiales %}
+    <tr>
+      <td>{{ m.titulo }}</td>
+      <td>{{ m.asignatura }}</td>
+      <td>{{ m.creado_en }}</td>
+      <td>{% if m.url %}<a href="{{ m.url }}" target="_blank">Abrir</a>{% else %}—{% endif %}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="4">No hay materiales.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h3 style="margin-top:18px;">Actividades</h3>
+<table>
+  <thead><tr><th>Actividad</th><th>Asignatura</th><th>Tipo</th><th>Publicación</th><th>Entrega</th><th>Mi entrega</th></tr></thead>
+  <tbody>
+    {% for act in actividades %}
+    <tr>
+      <td>{{ act.titulo }}</td>
+      <td>{{ act.asignatura }}</td>
+      <td>{{ act.tipo }}</td>
+      <td>{{ act.fecha_publicacion }}</td>
+      <td>{{ act.fecha_entrega or '—' }}</td>
+      <td>
+        {% if entregas.get(act.id) %}
+          <div><a href="{{ entregas.get(act.id).url or '#' }}" target="_blank">{{ entregas.get(act.id).url or 'Sin URL' }}</a></div>
+          <div class="muted">{{ entregas.get(act.id).comentario or '' }}</div>
+          <div class="muted">Enviado: {{ entregas.get(act.id).fecha }}</div>
+        {% else %}
+          <form method="post" action="{{ url_for('alumno_entregar', actividad_id=act.id) }}" class="inline-form">
+            <label>URL
+              <input type="url" name="url" placeholder="https://...">
+            </label>
+            <label>Comentario
+              <input type="text" name="comentario" placeholder="Notas">
+            </label>
+            <button class="btn">Entregar</button>
+          </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6">No hay actividades.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

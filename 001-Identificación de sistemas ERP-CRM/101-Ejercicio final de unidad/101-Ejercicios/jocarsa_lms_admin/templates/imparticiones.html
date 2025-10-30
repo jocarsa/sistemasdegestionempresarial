@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Imparticiones</h2>
+<form method="post" class="inline-form">
+  <label>Profesor
+    <select name="profesor_id">
+      {% for p in profesores %}<option value="{{ p.id }}">{{ p.n }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Asignatura
+    <select name="asignatura_id">
+      {% for a in asignaturas %}<option value="{{ a.id }}">{{ a.nombre }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Curso
+    <select name="curso_id">
+      {% for c in cursos %}<option value="{{ c.id }}">{{ c.nombre }}</option>{% endfor %}
+    </select>
+  </label>
+  <button class="btn">➕ Asignar</button>
+</form>
+<table>
+  <thead><tr><th>ID</th><th>Profesor</th><th>Asignatura</th><th>Curso</th><th>Acciones</th></tr></thead>
+  <tbody>
+    {% for it in data %}
+    <tr>
+      <td>{{ it.id }}</td>
+      <td>{{ it.profesor }}</td>
+      <td>{{ it.asignatura }}</td>
+      <td>{{ it.curso }}</td>
+      <td class="actions">
+        <form method="post" action="{{ url_for('imparticiones_eliminar', item_id=it.id) }}" onsubmit="return confirm('Eliminar?')">
+          <button class="danger">🗑️</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
