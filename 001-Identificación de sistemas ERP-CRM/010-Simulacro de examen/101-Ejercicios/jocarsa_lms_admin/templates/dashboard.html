@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Escritorio — LMS Admin{% endblock %}
+
+{% block breadcrumbs %}
+  Escritorio
+{% endblock %}
+
+{% block content %}
+<h2>Resumen</h2>
+<div class="cards">
+  <div class="card"><div><b>Usuarios</b></div><span>{{ counts.users }}</span></div>
+  <div class="card"><div><b>Alumnos</b></div><span>{{ counts.alumnos }}</span></div>
+  <div class="card"><div><b>Profesores</b></div><span>{{ counts.profesores }}</span></div>
+  <div class="card"><div><b>Cursos</b></div><span>{{ counts.cursos }}</span></div>
+  <div class="card"><div><b>Asignaturas</b></div><span>{{ counts.asignaturas }}</span></div>
+  <div class="card"><div><b>Materiales</b></div><span>{{ counts.materiales }}</span></div>
+  <div class="card"><div><b>Matrículas</b></div><span>{{ counts.matriculas }}</span></div>
+</div>
+
+<h2 style="margin-top:18px;">Analíticas</h2>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr));">
+  <!-- 1) Matrículas por mes (línea) -->
+  <div class="card">
+    <div style="width:100%">
+      <b>Matrículas por mes</b>
+      <canvas id="enrollsLine" height="140"></canvas>
+    </div>
+  </div>
+
+  <!-- 2) Alumnos por curso (barras) -->
+  <div class="card">
+    <div style="width:100%">
+      <b>Alumnos por curso (Top 8)</b>
+      <canvas id="alumnosCursoBar" height="140"></canvas>
+    </div>
+  </div>
+
+  <!-- 3) Materiales por asignatura (barras) -->
+  <div class="card">
+    <div style="width:100%">
+      <b>Materiales por asignatura (Top 8)</b>
+      <canvas id="materialesAsigBar" height="140"></canvas>
+    </div>
+  </div>
+
+  <!-- 4) Imparticiones por profesor (donut) -->
+  <div class="card">
+    <div style="width:100%">
+      <b>Imparticiones por profesor (Top 10)</b>
+      <canvas id="imparticionesPie" height="140"></canvas>
+    </div>
+  </div>
+
+  <!-- 5) Nº asignaturas por curso (barras) -->
+  <div class="card">
+    <div style="width:100%">
+      <b>Asignaturas por curso (Top 10)</b>
+      <canvas id="asigCursoBar" height="140"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Datos desde Flask
+  const months = {{ charts.months|tojson }};
+  const enrollsSeries = {{ charts.enrolls_series|tojson }};
+  const alumnosCursoLabels = {{ charts.alumnos_por_curso_labels|tojson }};
+  const alumnosCursoData = {{ charts.alumnos_por_curso_data|tojson }};
+  const materialesAsigLabels = {{ charts.materiales_por_asig_labels|tojson }};
+  const materialesAsigData = {{ charts.materiales_por_asig_data|tojson }};
+  const impProfLabels = {{ charts.imparticiones_prof_labels|tojson }};
+  const impProfData = {{ charts.imparticiones_prof_data|tojson }};
+  const asigCursoLabels = {{ charts.asig_por_curso_labels|tojson }};
+  const asigCursoData = {{ charts.asig_por_curso_data|tojson }};
+
+  // Paleta automática (Chart.js genera colores por defecto; aquí sólo definimos datasets)
+  const makeBar = (ctx, labels, data, title) => new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ label: title, data }] },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+    }
+  });
+
+  const makeLine = (ctx, labels, data, title) => new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets: [{ label: title, data, tension: 0.3, fill: false }] },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+    }
+  });
+
+  const makeDoughnut = (ctx, labels, data, title) => new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels, datasets: [{ label: title, data }] },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } },
+      cutout: '60%'
+    }
+  });
+
+  // Render
+  makeLine(document.getElementById('enrollsLine'), months, enrollsSeries, 'Matrículas');
+  makeBar(document.getElementById('alumnosCursoBar'), alumnosCursoLabels, alumnosCursoData, 'Alumnos');
+  makeBar(document.getElementById('materialesAsigBar'), materialesAsigLabels, materialesAsigData, 'Materiales');
+  makeDoughnut(document.getElementById('imparticionesPie'), impProfLabels, impProfData, 'Imparticiones');
+  makeBar(document.getElementById('asigCursoBar'), asigCursoLabels, asigCursoData, 'Asignaturas');
+</script>
+{% endblock %}
+

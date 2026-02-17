@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Aula — LMS{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="theme-light">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand"><a href="{{ url_for('alumno_home') }}">Aula</a></div>
+      <nav class="menu">
+        <a href="{{ url_for('alumno_home') }}">🏠 Inicio</a>
+        <a href="{{ url_for('alumno_logout') }}">🔒 Salir</a>
+      </nav>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <div class="breadcrumbs">{% block breadcrumbs %}{% endblock %}</div>
+        <div class="userbox">{{ session.get('student_username','') }}</div>
+      </header>
+      <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flash">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+      </main>
+      <footer class="footer"><small>Aula — LMS</small></footer>
+    </div>
+  </div>
+</body>
+</html>
+

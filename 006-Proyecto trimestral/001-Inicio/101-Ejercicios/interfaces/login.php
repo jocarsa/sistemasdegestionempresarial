@@ -1,0 +1,21 @@
+<style>
+	body{display:flex;justify-content:center;align-items:center;}
+  form{background:white;padding:20px;width:250px;height:400px;
+  display:flex;flex-direction:column;gap:10px;justify-content:center;border-radius:5px;}
+  input{padding:10px;border:1px solid var(--corporativo);outline:none;border-radius:5px;}
+  input[type="submit"]{background:var(--corporativo);color:white;}
+</style>
+<form>
+	<img src="static/logo.png" alt="Logo">
+	<input 
+  	type="text" 
+    name="usuario" 
+    placeholder="usuario"
+  >
+  <input 
+  	type="password" 
+    name="contrasena" 
+    placeholder="contraseña"
+  >
+  <input type="submit">
+</form>

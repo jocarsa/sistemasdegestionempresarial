@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ 'Editar' if item else 'Nuevo' }} alumno</h2>
+<form method="post" class="form-grid">
+  <label>Nombre
+    <input type="text" name="nombre" value="{{ item.nombre if item else '' }}" required>
+  </label>
+  <label>Apellidos
+    <input type="text" name="apellidos" value="{{ item.apellidos if item else '' }}" required>
+  </label>
+  <label>Email
+    <input type="email" name="email" value="{{ item.email if item else '' }}">
+  </label>
+  <button class="btn">Guardar</button>
+</form>
+{% endblock %}

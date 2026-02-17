@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Matrículas</h2>
+<form method="post" class="inline-form">
+  <label>Alumno
+    <select name="alumno_id">
+      {% for a in alumnos %}<option value="{{ a.id }}">{{ a.n }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Curso
+    <select name="curso_id">
+      {% for c in cursos %}<option value="{{ c.id }}">{{ c.nombre }}</option>{% endfor %}
+    </select>
+  </label>
+  <button class="btn">➕ Matricular</button>
+</form>
+<table>
+  <thead><tr><th>ID</th><th>Alumno</th><th>Curso</th><th>Fecha</th><th>Acciones</th></tr></thead>
+  <tbody>
+    {% for it in data %}
+    <tr>
+      <td>{{ it.id }}</td>
+      <td>{{ it.alumno }}</td>
+      <td>{{ it.curso }}</td>
+      <td>{{ it.fecha }}</td>
+      <td class="actions">
+        <form method="post" action="{{ url_for('matriculas_eliminar', item_id=it.id) }}" onsubmit="return confirm('Eliminar?')">
+          <button class="danger">🗑️</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Alumnos</h2>
+<a class="btn" href="{{ url_for('alumnos_nuevo') }}">➕ Nuevo alumno</a>
+<table>
+  <thead><tr><th>ID</th><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Acciones</th></tr></thead>
+  <tbody>
+    {% for it in items %}
+    <tr>
+      <td>{{ it.id }}</td>
+      <td>{{ it.nombre }}</td>
+      <td>{{ it.apellidos }}</td>
+      <td>{{ it.email or '' }}</td>
+      <td class="actions">
+        <a class="btn" href="{{ url_for('alumnos_editar', item_id=it.id) }}">✏️</a>
+        <form method="post" action="{{ url_for('alumnos_eliminar', item_id=it.id) }}" onsubmit="return confirm('Eliminar?')">
+          <button class="danger">🗑️</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

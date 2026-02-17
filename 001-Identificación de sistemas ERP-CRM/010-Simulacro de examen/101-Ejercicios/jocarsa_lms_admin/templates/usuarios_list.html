@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Usuarios</h2>
+<a class="btn" href="{{ url_for('usuarios_nuevo') }}">➕ Nuevo usuario</a>
+<table>
+  <thead><tr><th>ID</th><th>Usuario</th><th>Rol</th><th>Creado</th><th>Acciones</th></tr></thead>
+  <tbody>
+    {% for u in users %}
+    <tr>
+      <td>{{ u.id }}</td>
+      <td>{{ u.username }}</td>
+      <td>{{ u.role }}</td>
+      <td>{{ u.created_at }}</td>
+      <td class="actions">
+        <form method="post" action="{{ url_for('usuarios_resetpass', user_id=u.id) }}" onsubmit="return confirm('Resetear la contraseña?')">
+          <input type="password" name="newpass" placeholder="nueva contraseña" required>
+          <button>🔑 Reset</button>
+        </form>
+        <form method="post" action="{{ url_for('usuarios_eliminar', user_id=u.id) }}" onsubmit="return confirm('Eliminar?')">
+          <button class="danger">🗑️</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

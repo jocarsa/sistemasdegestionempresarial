@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Materiales</h2>
+<a class="btn" href="{{ url_for('materiales_nuevo') }}">➕ Nuevo material</a>
+<table>
+  <thead><tr><th>ID</th><th>Título</th><th>Asignatura</th><th>Curso</th><th>URL</th><th>Creado</th><th>Acciones</th></tr></thead>
+  <tbody>
+    {% for it in items %}
+    <tr>
+      <td>{{ it.id }}</td>
+      <td>{{ it.titulo }}</td>
+      <td>{{ it.asignatura }}</td>
+      <td>{{ it.curso }}</td>
+      <td>{% if it.url %}<a href="{{ it.url }}" target="_blank">abrir</a>{% endif %}</td>
+      <td>{{ it.creado_en }}</td>
+      <td class="actions">
+        <form method="post" action="{{ url_for('materiales_eliminar', item_id=it.id) }}" onsubmit="return confirm('Eliminar?')">
+          <button class="danger">🗑️</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

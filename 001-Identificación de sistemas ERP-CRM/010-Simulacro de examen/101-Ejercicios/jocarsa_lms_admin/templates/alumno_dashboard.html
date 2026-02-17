@@ -1,0 +1,41 @@
+{% extends "alumno_base.html" %}
+{% block title %}Mis cursos — Aula{% endblock %}
+{% block breadcrumbs %}Inicio{% endblock %}
+
+{% block content %}
+<h2>Hola, {{ alumno.nombre }} {{ alumno.apellidos }}</h2>
+
+<h3 style="margin-top:14px;">Mis cursos</h3>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+  {% for c in cursos %}
+  <div class="card">
+    <div>
+      <b>{{ c.nombre }}</b>
+      <div class="muted">{{ c.descripcion or '' }}</div>
+    </div>
+    <a class="btn" href="{{ url_for('alumno_curso', curso_id=c.id) }}">Entrar</a>
+  </div>
+  {% else %}
+  <div class="card"><div>No estás matriculado en ningún curso.</div></div>
+  {% endfor %}
+</div>
+
+<h3 style="margin-top:18px;">Próximas actividades</h3>
+<table>
+  <thead><tr><th>Actividad</th><th>Curso</th><th>Asignatura</th><th>Tipo</th><th>Entrega</th></tr></thead>
+  <tbody>
+    {% for a in actividades %}
+    <tr>
+      <td>{{ a.titulo }}</td>
+      <td>{{ a.curso }}</td>
+      <td>{{ a.asignatura }}</td>
+      <td>{{ a.tipo }}</td>
+      <td>{{ a.fecha_entrega or '—' }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5">No hay actividades.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

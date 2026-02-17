@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login — LMS Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="login-body">
+  <div class="login-card">
+    <h1>Acceso</h1>
+    <form method="post">
+      <label>Usuario
+        <input type="text" name="username" required>
+      </label>
+      <label>Contraseña
+        <input type="password" name="password" required>
+      </label>
+      <button type="submit">Entrar</button>
+    </form>
+    <p class="muted">Usuario inicial: <b>jocarsa</b> · Contraseña: <b>jocarsa</b></p>
+  </div>
+</body>
+</html>

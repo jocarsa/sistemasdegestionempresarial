@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}LMS Admin{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body class="theme-light">
+  <div class="layout">
+    <!-- ===== Sidebar (Left navigation) ===== -->
+    <aside class="sidebar">
+      <div class="brand">
+        <a href="{{ url_for('dashboard') }}">LMS Admin</a>
+      </div>
+
+      <nav class="menu">
+        <a href="{{ url_for('dashboard') }}">🏠 Escritorio</a>
+
+        <div class="menu-section">Academia</div>
+        <a href="{{ url_for('alumnos_list') }}">🎓 Alumnos</a>
+        <a href="{{ url_for('profesores_list') }}">👨‍🏫 Profesores</a>
+        <a href="{{ url_for('cursos_list') }}">📚 Cursos</a>
+        <a href="{{ url_for('asignaturas_list') }}">🧩 Asignaturas</a>
+        <a href="{{ url_for('materiales_list') }}">🗂️ Materiales</a>
+
+        <div class="menu-section">Relaciones</div>
+        <a href="{{ url_for('matriculas') }}">📝 Matrículas</a>
+        <a href="{{ url_for('imparticiones') }}">🗓️ Imparticiones</a>
+
+        <div class="menu-section">Sistema</div>
+        <a href="{{ url_for('usuarios_list') }}">👤 Usuarios</a>
+        <a class="logout" href="{{ url_for('logout') }}">🔒 Salir</a>
+      </nav>
+    </aside>
+
+    <!-- ===== Main area (Right side) ===== -->
+    <div class="main">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="breadcrumbs">
+          {% block breadcrumbs %}{% endblock %}
+        </div>
+        <div class="userbox">
+          <span>{{ session.get('username','') }}</span>
+        </div>
+      </header>
+
+      <!-- Main content -->
+      <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flash">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <small>Demo educativa — Flask + SQLite</small>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
+
