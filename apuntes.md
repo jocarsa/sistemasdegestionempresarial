@@ -73,6 +73,8 @@
   - [Login](#login)
   - [selector de modulos](#selector-de-modulos)
   - [seguridad basica](#seguridad-basica)
+  - [componentes](#componentes)
+  - [componente tabla](#componente-tabla)
 - [Repaso PHP](#repaso-php)
   - [Repaso inicial](#repaso-inicial)
 - [.git](#git)
@@ -5715,6 +5717,84 @@ Ventana kanban
       	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
       }else{
       	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+      }
+    ?>
+  </body>
+</html>
+```
+
+
+<a id="componentes"></a>
+## componentes
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/005-componentes)
+
+### index
+<small>Creado: 2026-02-18 15:17</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+    <?php
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+        	include "modulos/".$_GET['modulo']."/index.php";
+        }else{
+        	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+        }
+      }
+    ?>
+  </body>
+</html>
+```
+
+
+<a id="componente-tabla"></a>
+## componente tabla
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/006-componente%20tabla)
+
+### index
+<small>Creado: 2026-02-18 15:46</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+    <?php
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+        	include "modulos/".$_GET['modulo']."/index.php";
+        }else{
+        	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+        }
       }
     ?>
   </body>

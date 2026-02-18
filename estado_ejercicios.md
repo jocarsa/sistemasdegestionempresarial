@@ -1,6 +1,6 @@
 # sistemasdegestionempresarial — Estado de ejercicios
 
-Generado: 2026-02-18 14:00
+Generado: 2026-02-18 16:00
 
 ---
 
@@ -92,6 +92,8 @@ Generado: 2026-02-18 14:00
 - 🟢 Login — 2026-02-17
 - 🟢 selector de modulos — 2026-02-17
 - 🟢 seguridad basica — 2026-02-17
+- 🟢 componentes — 2026-02-18
+- 🟢 componente tabla — 2026-02-18
 
 
 ## Repaso PHP
