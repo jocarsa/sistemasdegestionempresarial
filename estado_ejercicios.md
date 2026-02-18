@@ -1,6 +1,6 @@
 # sistemasdegestionempresarial — Estado de ejercicios
 
-Generado: 2026-02-17 16:00
+Generado: 2026-02-18 14:00
 
 ---
 
@@ -65,7 +65,7 @@ Generado: 2026-02-17 16:00
 
 - 🔴 Tipos de empresa. Necesidades de la empresa
 - 🔴 Selección de los módulos del sistema ERP-CRM
-- 🔴 Tablas y vistas que es preciso adaptar
+- 🟢 Tablas y vistas que es preciso adaptar — 2026-02-17
 - 🔴 Consultas necesarias para obtener información
 - 🔴 Creación de formularios personalizados
 - 🔴 Creación de informes personalizados
@@ -89,3 +89,11 @@ Generado: 2026-02-17 16:00
 ## Proyecto trimestral
 
 - 🟢 Inicio — 2026-02-17
+- 🟢 Login — 2026-02-17
+- 🟢 selector de modulos — 2026-02-17
+- 🟢 seguridad basica — 2026-02-17
+
+
+## Repaso PHP
+
+- 🟢 Repaso inicial — 2026-02-17

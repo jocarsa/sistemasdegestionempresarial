@@ -70,6 +70,11 @@
   - [Depuración y tratamiento de errores](#depuracion-y-tratamiento-de-errores)
 - [Proyecto trimestral](#proyecto-trimestral)
   - [Inicio](#inicio)
+  - [Login](#login)
+  - [selector de modulos](#selector-de-modulos)
+  - [seguridad basica](#seguridad-basica)
+- [Repaso PHP](#repaso-php)
+  - [Repaso inicial](#repaso-inicial)
 - [.git](#git)
   - [branches](#branches)
   - [hooks](#hooks)
@@ -5602,7 +5607,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/001-Inicio)
 
 ### index
-<small>Creado: 2026-02-17 15:57</small>
+<small>Creado: 2026-02-17 16:06</small>
 
 `index.php`
 
@@ -5612,6 +5617,7 @@ Ventana kanban
 	<head>
   	<title>SSGG</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
   </head>
   <body>
     <?php
@@ -5619,6 +5625,296 @@ Ventana kanban
     ?>
   </body>
 </html>
+```
+
+
+<a id="login"></a>
+## Login
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/002-Login)
+
+### index
+<small>Creado: 2026-02-17 19:26</small>
+
+`index.php`
+
+```
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+    <?php
+      include "interfaces/login.php";
+    ?>
+  </body>
+</html>
+```
+
+
+<a id="selector-de-modulos"></a>
+## selector de modulos
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/003-selector%20de%20modulos)
+
+### index
+<small>Creado: 2026-02-17 19:59</small>
+
+`index.php`
+
+```
+<?php session_start(); ?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+    <?php
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+      }
+    ?>
+  </body>
+</html>
+```
+
+
+<a id="seguridad-basica"></a>
+## seguridad basica
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/004-seguridad%20basica)
+
+### index
+<small>Creado: 2026-02-17 20:21</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+    <?php
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+      }
+    ?>
+  </body>
+</html>
+```
+
+
+
+<a id="repaso-php"></a>
+# Repaso PHP
+
+<a id="repaso-inicial"></a>
+## Repaso inicial
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/007-Repaso%20PHP/001-Repaso%20inicial)
+
+### salidas
+<small>Creado: 2026-02-17 19:31</small>
+
+`001-salidas.php`
+
+```
+<?php
+	echo "Esto es una salida en PHP";
+?>
+```
+
+### embebido
+<small>Creado: 2026-02-17 19:32</small>
+
+`002-embebido.php`
+
+```
+Esto es HTML
+
+<?php
+	echo "Esto es una salida en PHP";
+?>
+
+Y esto vuelve a ser HTML
+```
+
+### multiembebido
+<small>Creado: 2026-02-17 19:32</small>
+
+`003-multiembebido.php`
+
+```
+Esto es HTML
+
+<?php
+	echo "Esto es una salida en PHP";
+?>
+
+Y esto vuelve a ser HTML
+
+<?php
+	echo "Y esto vuelve a ser PHP";
+?>
+```
+
+### PHP hace calculos
+<small>Creado: 2026-02-17 19:33</small>
+
+`004-PHP hace calculos.php`
+
+```
+4+3
+<br>
+<?php
+
+	echo 4+3
+
+?>
+```
+
+### variables
+<small>Creado: 2026-02-17 19:34</small>
+
+`005-variables.php`
+
+```
+<?php
+	$edad = 47;
+  echo $edad;
+?>
+```
+
+### operadores aritmeticos
+<small>Creado: 2026-02-17 19:35</small>
+
+`006-operadores aritmeticos.php`
+
+```
+<?php
+	echo 4+3;
+  echo "<br>";
+  echo 4-3;
+  echo "<br>";
+  echo 4*3;
+  echo "<br>";
+  echo 4/3;
+  echo "<br>";
+?>
+```
+
+### estructuras condicionales
+<small>Creado: 2026-02-17 19:36</small>
+
+`007-estructuras condicionales.php`
+
+```
+<?php
+	
+  $edad = 47;
+  
+  if($edad < 10){
+  	echo "Eres un niño";
+  }
+  
+?>
+```
+
+### clausula else
+<small>Creado: 2026-02-17 19:37</small>
+
+`008-clausula else.php`
+
+```
+<?php
+	
+  $edad = 47;
+  
+  if($edad < 10){
+  	echo "Eres un niño";
+  }else{
+  	echo "No eres un niño";
+  }
+  
+?>
+```
+
+### else if
+<small>Creado: 2026-02-17 19:37</small>
+
+`009-else if.php`
+
+```
+<?php
+	
+  $edad = 47;
+  
+  if($edad < 10){
+  	echo "Eres un niño";
+  }else if(edad >= 10 && edad < 20){
+  	echo "Eres un adolescente";
+  }else if(edad >= 20 && edad < 30){
+  	echo "Eres un joven";
+  }else{
+  	echo "Ya no eres un joven";
+  }
+  
+?>
+```
+
+### switch
+<small>Creado: 2026-02-17 19:39</small>
+
+`010-switch.php`
+
+```
+<?php
+	
+  $diadelasemana = "martes";
+  
+  switch($diadelasemana){
+  	case "lunes":
+     	echo "Hoy es el peor día de la semana";
+      break;
+     case "martes":
+     	echo "Hoy es el segundo peor día de la semana";
+      break;
+     case "miercoles":
+     	echo "Ya estamos a mitad de semana";
+      break;
+     case "jueves":
+     	echo "Ya es casi viernes";
+      break;
+     case "viernes":
+     	echo "Por fin es viernes";
+      break;
+     case "sabado":
+     	echo "Hoy es el mejor día de la semana";
+      break;
+     case "domingo":
+     	echo "Parece mentira que mañana ya sea lunes";
+      break;
+  }
+  
+?>
 ```
 
 
