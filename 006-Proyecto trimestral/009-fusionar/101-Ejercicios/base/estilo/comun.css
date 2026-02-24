@@ -13,3 +13,9 @@ body,html{
 main{
 	display:flex;
 }
+nav,section{
+	padding:20px;
+}
+section{
+	background:white;
+}
