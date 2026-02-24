@@ -75,8 +75,11 @@
   - [seguridad basica](#seguridad-basica)
   - [componentes](#componentes)
   - [componente tabla](#componente-tabla)
+  - [documentacion](#documentacion)
 - [Repaso PHP](#repaso-php)
   - [Repaso inicial](#repaso-inicial)
+  - [Avanzamos](#avanzamos)
+  - [Conexion con bases de datos](#conexion-con-bases-de-datos)
 - [.git](#git)
   - [branches](#branches)
   - [hooks](#hooks)
@@ -5802,6 +5805,45 @@ Ventana kanban
 ```
 
 
+<a id="documentacion"></a>
+## documentacion
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/007-documentacion)
+
+### index
+<small>Creado: 2026-02-24 15:56</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+    <?php
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+        	include "modulos/".$_GET['modulo']."/index.php";
+        }else{
+        	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+        }
+      }
+    ?>
+  </body>
+</html>
+```
+
+
 
 <a id="repaso-php"></a>
 # Repaso PHP
@@ -5996,6 +6038,233 @@ Y esto vuelve a ser HTML
   
 ?>
 ```
+
+
+<a id="avanzamos"></a>
+## Avanzamos
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/007-Repaso%20PHP/002-Avanzamos)
+
+### programacion funcional
+<small>Creado: 2026-02-24 15:15</small>
+
+`001-programacion funcional.php`
+
+```
+<?php
+	function diHola(){
+  	echo "Hola que tal";
+  }
+?>
+```
+
+### llamo a la funcion
+<small>Creado: 2026-02-24 15:17</small>
+
+`002-llamo a la funcion.php`
+
+```
+<?php
+	function diHola(){
+  	echo "Hola que tal";
+  }
+  diHola();
+?>
+```
+
+### return en la salida
+<small>Creado: 2026-02-24 15:20</small>
+
+`003-return en la salida.php`
+
+```
+<?php
+	function diHola(){
+  	return "Hola que tal";
+  }
+  echo diHola();
+?>
+```
+
+### entrada mal
+<small>Creado: 2026-02-24 15:21</small>
+
+`004-entrada mal.php`
+
+```
+<?php
+	$edad = 47;
+	function diHola(){
+  	return "Hola que tal tu edad es de ".$edad." años";
+  }
+  echo diHola();
+?>
+```
+
+### parametros de entrada
+<small>Creado: 2026-02-24 15:24</small>
+
+`005-parametros de entrada.php`
+
+```
+<?php
+	function diHola($edad){
+  	return "Hola que tal tu edad es de ".$edad." años";
+  }
+  echo diHola(47);
+?>
+```
+
+### clases
+<small>Creado: 2026-02-24 15:30</small>
+
+`006-clases.php`
+
+```
+<?php
+	class Gato{
+  	$this->color;
+    $this->edad;
+  }
+  
+  
+?>
+```
+
+### metodos
+<small>Creado: 2026-02-24 15:33</small>
+
+`007-metodos.php`
+
+```
+<?php
+	class Gato{
+  	function constructor(){
+      $this->color;
+      $this->edad;
+    }
+    
+    function maulla(){
+    	return "miau";
+    }
+  }
+  
+  $gato1 = new Gato();
+  $gato1->color = "naranja";
+  echo $gato1->maulla();
+  echo $gato1->color;
+?>
+```
+
+### ejemplo del problema
+<small>Creado: 2026-02-24 15:37</small>
+
+`008-ejemplo del problema.php`
+
+```
+<?php
+	class Gato{
+  	function constructor(){
+      $this->color;
+      $this->edad;
+    }
+    
+    function maulla(){
+    	return "miau";
+    }
+  }
+  
+  $gato1 = new Gato();
+  $gato1->edad = 0;
+  echo "el gato tiene ".$gato1->edad." años";
+  $gato1->edad = 5;
+  echo "el gato tiene ".$gato1->edad." años";
+?>
+```
+
+### setters y getters
+<small>Creado: 2026-02-24 15:40</small>
+
+`009-setters y getters.php`
+
+```
+<?php
+	class Gato{
+  	function constructor(){
+      $this->color;
+      $this->edad;
+    }
+    
+    function maulla(){
+    	return "miau";
+    }
+    function setEdad($nuevaedad){
+    	$this->edad = $nuevaedad;
+    }
+    function getEdad(){
+    	return $this->edad;
+    }
+  }
+  
+  $gato1 = new Gato();
+  $gato1->setEdad(0);
+  echo "el gato tiene ".$gato1->getEdad()." años";
+  $gato1->setEdad(5);
+  echo "el gato tiene ".$gato1->getEdad()." años";
+?>
+```
+
+### validacion
+<small>Creado: 2026-02-24 15:42</small>
+
+`010-validacion.php`
+
+```
+<?php
+
+class Gato {
+
+    public $color;
+    public $edad;
+
+    function __construct(){
+        $this->edad = 0;
+        $this->color = "";
+    }
+
+    function maulla(){
+        return "miau";
+    }
+
+    function setEdad($nuevaedad){
+        if($this->edad == $nuevaedad - 1){
+            $this->edad = $nuevaedad;
+        }else{
+            return "error";
+        }
+    }
+
+    function getEdad(){
+        return $this->edad;
+    }
+}
+
+$gato1 = new Gato();
+
+$gato1->setEdad(1);
+echo "El gato tiene ".$gato1->getEdad()." años<br>";
+
+$gato1->setEdad(5);   // error lógico
+echo "El gato tiene ".$gato1->getEdad()." años";
+
+?>
+```
+
+
+<a id="conexion-con-bases-de-datos"></a>
+## Conexion con bases de datos
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/007-Repaso%20PHP/003-Conexion%20con%20bases%20de%20datos)
 
 
 
