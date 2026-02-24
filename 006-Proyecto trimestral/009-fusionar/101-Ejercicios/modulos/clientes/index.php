@@ -7,7 +7,7 @@
     <section>
       <?php
         $leyenda = "Crear nuevo cliente";
-        $destino = "crearnuevocliente.php";
+        $destino = "?modulo=".$_GET['modulo']."&operacion=insertar";
         include "interfaces/componentes/boton.php";
         $tabla = [];
         $db = new PDO('sqlite:db/empresa.db');		// Abro la base de datos
@@ -15,7 +15,12 @@
           while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $tabla[] = $row;
           }
-
-        include "interfaces/componentes/tabla.php";
+				if(isset($_GET['operacion'])){
+        	if($_GET['operacion'] == "insertar"){
+          	include "interfaces/componentes/formulario.php";
+          }
+        }else{
+        	include "interfaces/componentes/tabla.php";
+        }
       ?>
     </section>
