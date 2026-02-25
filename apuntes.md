@@ -77,6 +77,10 @@
   - [componente tabla](#componente-tabla)
   - [documentacion](#documentacion)
   - [navegacion](#navegacion)
+  - [fusionar](#fusionar)
+  - [entidades](#entidades)
+  - [modulos](#modulos)
+  - [operaciones](#operaciones)
 - [Repaso PHP](#repaso-php)
   - [Repaso inicial](#repaso-inicial)
   - [Avanzamos](#avanzamos)
@@ -5871,6 +5875,186 @@ Ventana kanban
   	
     <main>
     <?php
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+        	include "modulos/".$_GET['modulo']."/index.php";
+        }else{
+        	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+        }
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="fusionar"></a>
+## fusionar
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/009-fusionar)
+
+### index
+<small>Creado: 2026-02-24 20:10</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+        	include "modulos/".$_GET['modulo']."/index.php";
+        }else{
+        	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+        }
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="entidades"></a>
+## entidades
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/010-entidades)
+
+### index
+<small>Creado: 2026-02-25 15:12</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+        	include "modulos/".$_GET['modulo']."/index.php";
+        }else{
+        	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+        }
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="modulos"></a>
+## modulos
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/011-modulos)
+
+### index
+<small>Creado: 2026-02-25 15:22</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+        	include "modulos/".$_GET['modulo']."/index.php";
+        }else{
+        	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+        }
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="operaciones"></a>
+## operaciones
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/012-operaciones)
+
+### index
+<small>Creado: 2026-02-25 15:57</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
     	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
       	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
       }else{

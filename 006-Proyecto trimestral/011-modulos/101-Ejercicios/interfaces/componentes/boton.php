@@ -26,7 +26,7 @@
     display:inline-block;
   }
 </style>
-<a href="<?= $destino ?>">
+<a href="?modulo=<?= $_GET['modulo'] ?>&vista=<?= $destino ?>">
 	<button>
   	<span class="inicial"><?= $leyenda[0] ?></span>
   	<?= $leyenda ?>
