@@ -81,6 +81,8 @@
   - [entidades](#entidades)
   - [modulos](#modulos)
   - [operaciones](#operaciones)
+  - [documentacion](#documentacion-1)
+  - [graficas PJ](#graficas-pj)
 - [Repaso PHP](#repaso-php)
   - [Repaso inicial](#repaso-inicial)
   - [Avanzamos](#avanzamos)
@@ -6033,6 +6035,98 @@ Ventana kanban
 
 ### index
 <small>Creado: 2026-02-25 16:25</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  require_once "util/helpers.php";   // ✅ AÑADIR ESTO
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+        	include "modulos/".$_GET['modulo']."/index.php";
+        }else{
+        	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+        }
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="documentacion-1"></a>
+## documentacion
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/013-documentacion)
+
+### index
+<small>Creado: 2026-03-03 15:09</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  require_once "util/helpers.php";   // ✅ AÑADIR ESTO
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+        	include "modulos/".$_GET['modulo']."/index.php";
+        }else{
+        	include "interfaces/selectormodulos.php";	// Cargame el escritorio
+        }
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="graficas-pj"></a>
+## graficas PJ
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/014-graficas%20PJ)
+
+### index
+<small>Creado: 2026-03-03 15:49</small>
 
 `index.php`
 
