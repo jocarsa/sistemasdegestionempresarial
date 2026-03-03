@@ -1,0 +1,283 @@
+:root{
+  /* Corporate */
+  --indigo:#2f2e8b;     /* principal */
+  --orange:#ff6a00;     /* acento */
+
+  /* UI */
+  --bg:#f6f7fb;
+  --card:#ffffff;
+  --text:#1f2430;
+  --muted:#6b7280;
+  --border:#e6e8f0;
+
+  --radius:14px;
+  --shadow:0 10px 25px rgba(0,0,0,.08);
+
+  /* Compat con tu código actual */
+  --corporativo: var(--indigo);
+}
+
+*{ box-sizing:border-box; }
+
+html,body{
+  width:100%;
+  height:100%;
+  padding:0;
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
+
+main{
+  display:flex;
+  width:100%;
+  height:100%;
+}
+
+/* ---------------------------
+   NAV
+--------------------------- */
+nav{
+  flex:1;
+  min-width:240px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+
+  background:var(--indigo);
+  color:white;
+}
+
+/* ---------------------------
+   SECTION / LAYOUT
+--------------------------- */
+section{
+  flex:5;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+
+  background:var(--bg);
+}
+
+/* ---------------------------
+   BUTTON (tu .btn)
+--------------------------- */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18);
+  padding:10px 14px 10px 12px;
+  border-radius:999px;
+
+  cursor:pointer;
+  text-decoration:none;
+  color:white;
+  font-size:14px;
+  line-height:1;
+  transition: transform .06s ease, filter .12s ease, background .12s ease;
+}
+
+.btn:hover{
+  filter:brightness(1.05);
+  background:rgba(255,255,255,.14);
+}
+.btn:active{
+  transform: translateY(1px);
+}
+
+.inicial{
+  background:var(--orange);
+  color:white;
+
+  width:22px;
+  height:22px;
+  border-radius:999px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:12px;
+  font-weight:700;
+}
+
+/* ---------------------------
+   TABLAS (componente tabla.php)
+--------------------------- */
+table{
+  width:100%;
+  max-width:1100px;
+  border-spacing:0;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+thead th{
+  background:var(--indigo);
+  color:white;
+  position:sticky;
+  top:0;
+  font-weight:600;
+}
+
+th,td{
+  padding:10px 12px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+  font-size:14px;
+}
+
+tbody tr:hover{
+  background:#fafbff;
+}
+
+.acciones{ display:flex; gap:8px; align-items:center; }
+
+.a{
+  border:1px solid var(--border);
+  background:white;
+  padding:7px 10px;
+  border-radius:999px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:13px;
+}
+
+.a:hover{
+  border-color: rgba(47,46,139,.35);
+}
+
+button.bdel{
+  border:1px solid rgba(255,106,0,.35);
+  background:white;
+  padding:7px 10px;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+button.bdel:hover{
+  background:rgba(255,106,0,.08);
+}
+
+/* ---------------------------
+   FORM (componente formulario.php)
+   (sin tocar tu inline CSS, pero mejora lo global)
+--------------------------- */
+input,select,textarea,button{
+  font:inherit;
+}
+
+/* ---------------------------
+   LOGIN (tu login.php mete <style>, pero esto ayuda si lo quitas luego)
+--------------------------- */
+#bodylogin, body.login{
+  background: var(--bg);
+}
+/* =====================================================
+   CENTERED SCREENS (login + selector)
+===================================================== */
+
+.centered-screen{
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ---------------- LOGIN ---------------- */
+
+.login-card{
+    background:white;
+    padding:40px;
+    width:320px;
+
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+
+    border-radius:16px;
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+}
+
+.login-card img{
+    width:120px;
+    margin:auto;
+}
+
+.login-card input{
+    padding:10px;
+    border:1px solid var(--border);
+    border-radius:8px;
+}
+
+.login-card input:focus{
+    border-color:var(--indigo);
+}
+
+.login-card input[type="submit"]{
+    background:var(--indigo);
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.login-card input[type="submit"]:hover{
+    background:var(--orange);
+}
+
+/* ---------------- MODULE SELECTOR ---------------- */
+
+.modulos-wrapper{
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:25px;
+    max-width:800px;
+    width:100%;
+}
+
+.modulo-card{
+    background:white;
+    padding:30px;
+    text-align:center;
+
+    border-radius:18px;
+    box-shadow:var(--shadow);
+
+    transition:.15s;
+}
+
+.modulo-card a{
+    text-decoration:none;
+    color:var(--text);
+}
+
+.modulo-card:hover{
+    transform:translateY(-4px);
+    border:1px solid rgba(47,46,139,.25);
+}
+
+.modulo-card h3{
+    margin-top:10px;
+}

@@ -83,6 +83,7 @@
   - [operaciones](#operaciones)
   - [documentacion](#documentacion-1)
   - [graficas PJ](#graficas-pj)
+  - [Modulos en la base de datos](#modulos-en-la-base-de-datos)
 - [Repaso PHP](#repaso-php)
   - [Repaso inicial](#repaso-inicial)
   - [Avanzamos](#avanzamos)
@@ -6158,6 +6159,52 @@ Ventana kanban
         }else{
         	include "interfaces/selectormodulos.php";	// Cargame el escritorio
         }
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="modulos-en-la-base-de-datos"></a>
+## Modulos en la base de datos
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/015-Modulos%20en%20la%20base%20de%20datos)
+
+### index
+<small>Creado: 2026-03-03 16:35</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  require_once "util/helpers.php";   // ✅ AÑADIR ESTO
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+  include "interfaces/modulo.php";
+}else{
+  include "interfaces/selectormodulos.php";
+}
       }
     ?>
     </main>
