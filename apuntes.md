@@ -6032,13 +6032,14 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/012-operaciones)
 
 ### index
-<small>Creado: 2026-02-25 15:57</small>
+<small>Creado: 2026-02-25 16:25</small>
 
 `index.php`
 
 ```
 <?php
 	session_start(); 
+  require_once "util/helpers.php";   // ✅ AÑADIR ESTO
   include "util/saneador.php";
 ?>
 <!doctype html>
