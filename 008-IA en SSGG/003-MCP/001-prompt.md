@@ -1,0 +1,1 @@
+sql-sqlite to create a fictional table for customers in spanish - create multiple pieces of data to make queries afterwards

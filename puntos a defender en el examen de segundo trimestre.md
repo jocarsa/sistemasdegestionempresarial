@@ -1,3 +1,5 @@
+Asignatura sistemas de gestión empresarial
+
 1.-Indica un listado de los diferentes tipos de 
 sistema de gestión empresarial (ERP/CRM(etc))
 2.-Identifica las características de tu software
@@ -35,6 +37,26 @@ de acceso a datos en tu aplicación
 12.-Enumera los informes y las gráficas que genera
 tu aplicación
 
+Asignatura: Servicios y procesos
+
+1.-Demostrar que comprendéis la comunicación entre
+sistemas de gestión empresarial preparando mecanismos
+de comunicación tales como APIs
+
+2.-Demostrar que entendéis el rol de servidor (el que
+sirve la api) y el rol de cliente (el que consume la 
+api)
+
+3.-Demostrar la apertura de un servicio web (API) 
+definiendo el contrato, y documentando el contrato
+para los desarrolladores externos
+
+4.-Demostrar la implantación de técnicas criptográficas
+de ida y vuelta (con desencriptación)
+
+5.-Demostrar la implantación de técnicas de hasheado
+
+
 
 
 
@@ -47,6 +69,24 @@ En el examen tendréis vuestro proyecto al lado
 No habrá que responder a nada de memoria
 El texto del examen se escribe en el propio examen
 Pero podéis llevaros una escaleta
+
+
+
+Forma del examen:
+
+1.-el examen sigue a rajatabla los resultados de aprendizaje
+2.-Para cada resultado de aprendizaje:
+	1.-Debéis hablar siempre de vuestro proyecto
+	2.-Grabáis un video de 30seg-1min con captura de pantalla (OBS) mostrando ese concepto en vuestro proyecto
+		1.-Primer 50% me enseñáis el proyecto en funcionamiento
+		2.-Segundo 50% me enseñáis el código y la base de datos
+	3.-Redactáis un texto (pensad en Linkedin) que contenga:
+		1.-Introducción
+		2.-Componentes de desarrollo/tecnologías
+		3.-Para qué le sirve esto al usuario final
+		4.-Conclusión
+	4.-Enlace a GitHub (archivo o parte del proyecto donde se muestre lo que estáis enseñando)
+
 
 
 

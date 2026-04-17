@@ -1,0 +1,7 @@
+Dime qué es HTML
+Dime qué es PHP
+Dime qué es Python
+Dime qué es CSS
+Dime qué es Java
+Dime qué es SQL
+Dime qué es Javascript

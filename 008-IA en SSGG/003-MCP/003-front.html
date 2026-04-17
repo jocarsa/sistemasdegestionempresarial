@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>jocarsa | sistema de gestión empresarial</title>
+    <style>
+      *{
+        box-sizing:border-box;
+      }
+
+      html,body{
+        margin:0;
+        padding:0;
+        width:100%;
+        height:100%;
+        font-family:Arial, Helvetica, sans-serif;
+        background:#e9eef4;
+        color:#1f2937;
+        overflow:hidden;
+      }
+
+      body{
+        width:100%;
+        height:100%;
+      }
+
+      .app{
+        width:100vw;
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        overflow:hidden;
+      }
+
+      .cabecera{
+        background:linear-gradient(135deg,#0f172a,#1e293b);
+        color:white;
+        padding:22px 28px;
+        flex:0 0 auto;
+        box-shadow:0 4px 20px rgba(0,0,0,0.15);
+        z-index:2;
+      }
+
+      .cabecera h1{
+        margin:0;
+        font-size:28px;
+        font-weight:bold;
+      }
+
+      .cabecera p{
+        margin:6px 0 0 0;
+        opacity:0.9;
+        font-size:14px;
+      }
+
+      .contenido{
+        flex:1 1 auto;
+        display:grid;
+        grid-template-columns: 380px 1fr;
+        gap:20px;
+        padding:20px;
+        min-height:0;
+        overflow:hidden;
+      }
+
+      .panel-izquierdo,
+      .panel-derecho{
+        background:white;
+        border-radius:16px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        overflow:hidden;
+        min-height:0;
+        display:flex;
+        flex-direction:column;
+      }
+
+      .panel-seccion{
+        padding:20px;
+        border-bottom:1px solid #eef2f7;
+      }
+
+      .panel-seccion:last-child{
+        border-bottom:none;
+      }
+
+      .panel-seccion h2{
+        margin:0 0 12px 0;
+        font-size:18px;
+        color:#334155;
+      }
+
+      .fila{
+        display:flex;
+        gap:10px;
+        align-items:center;
+      }
+
+      input[type="text"]{
+        flex:1;
+        width:100%;
+        padding:14px 16px;
+        border:1px solid #cbd5e1;
+        border-radius:10px;
+        font-size:16px;
+        outline:none;
+        transition:all 0.2s;
+      }
+
+      input[type="text"]:focus{
+        border-color:#2563eb;
+        box-shadow:0 0 0 4px rgba(37,99,235,0.12);
+      }
+
+      button{
+        border:none;
+        border-radius:10px;
+        padding:14px 16px;
+        cursor:pointer;
+        font-size:15px;
+        transition:all 0.2s;
+        white-space:nowrap;
+      }
+
+      #botonVoz{
+        background:#e2e8f0;
+        color:#0f172a;
+        min-width:56px;
+      }
+
+      #botonVoz:hover{
+        background:#cbd5e1;
+      }
+
+      #botonVoz.activo{
+        background:#ef4444;
+        color:white;
+      }
+
+      #botonConsultar{
+        background:#2563eb;
+        color:white;
+      }
+
+      #botonConsultar:hover{
+        background:#1d4ed8;
+      }
+
+      #botonLeer{
+        background:#0f766e;
+        color:white;
+      }
+
+      #botonLeer:hover{
+        background:#115e59;
+      }
+
+      .estado-voz{
+        margin-top:12px;
+        font-size:14px;
+        color:#475569;
+      }
+
+      .panel-scroll{
+        flex:1 1 auto;
+        overflow:auto;
+        min-height:0;
+      }
+
+      .resumen{
+        line-height:1.7;
+        font-size:16px;
+        color:#1e293b;
+      }
+
+      .panel-info{
+        border:1px solid #e5e7eb;
+        background:#f8fafc;
+        border-radius:12px;
+        padding:16px;
+      }
+
+      .ok{
+        background:#dcfce7;
+        color:#166534;
+        border:1px solid #bbf7d0;
+        padding:12px;
+        border-radius:8px;
+      }
+
+      .error{
+        background:#fee2e2;
+        color:#991b1b;
+        border:1px solid #fecaca;
+        padding:12px;
+        border-radius:8px;
+      }
+
+      table{
+        width:100%;
+        border-collapse:collapse;
+        background:white;
+      }
+
+      th,td{
+        text-align:left;
+        padding:10px 12px;
+        border-bottom:1px solid #e5e7eb;
+        font-size:14px;
+        vertical-align:top;
+      }
+
+      th{
+        position:sticky;
+        top:0;
+        background:#eff6ff;
+        color:#1d4ed8;
+        z-index:1;
+      }
+
+      .tabla-wrap{
+        overflow:auto;
+        border:1px solid #e5e7eb;
+        border-radius:12px;
+        background:white;
+        max-height:100%;
+      }
+
+      pre{
+        background:#0f172a;
+        color:#e2e8f0;
+        padding:16px;
+        border-radius:10px;
+        overflow:auto;
+        white-space:pre-wrap;
+        word-break:break-word;
+        margin:0;
+      }
+
+      .oculto{
+        display:none;
+      }
+
+      @media (max-width: 900px){
+        .contenido{
+          grid-template-columns:1fr;
+          grid-template-rows:auto 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="cabecera">
+        <h1>jocarsa | sistema de gestión empresarial</h1>
+        <p>Consulta información de clientes con lenguaje natural, voz, resumen inteligente y lectura automática.</p>
+      </div>
+
+      <div class="contenido">
+        <div class="panel-izquierdo">
+          <div class="panel-seccion">
+            <h2>Consulta</h2>
+            <div class="fila">
+              <input type="text" id="entrada" placeholder="Ejemplo: dame los clientes activos de Valencia mayores de 30 años">
+            </div>
+
+            <div class="fila" style="margin-top:12px;">
+              <button id="botonVoz" title="Hablar">🎤</button>
+              <button id="botonConsultar">Consultar</button>
+              <button id="botonLeer" title="Leer resumen">🔊 Leer</button>
+            </div>
+
+            <div class="estado-voz" id="estadoVoz">Micrófono inactivo.</div>
+          </div>
+
+          <div class="panel-seccion oculto">
+            <h2>SQL generado</h2>
+            <pre id="consulta"></pre>
+          </div>
+
+          <div class="panel-seccion">
+            <h2>Resumen generado por IA</h2>
+            <div class="panel-info resumen" id="resumen">Todavía no hay resumen.</div>
+          </div>
+        </div>
+
+        <div class="panel-derecho">
+          <div class="panel-seccion" style="padding-bottom:12px;">
+            <h2>Resultado en tabla</h2>
+          </div>
+          <div class="panel-scroll" id="resultado">
+            <div class="panel-seccion">
+              Todavía no se ha ejecutado ninguna consulta.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const entrada = document.querySelector("#entrada");
+      const botonConsultar = document.querySelector("#botonConsultar");
+      const botonVoz = document.querySelector("#botonVoz");
+      const botonLeer = document.querySelector("#botonLeer");
+      const estadoVoz = document.querySelector("#estadoVoz");
+      const consulta = document.querySelector("#consulta");
+      const resumen = document.querySelector("#resumen");
+      const resultado = document.querySelector("#resultado");
+
+      let ultimoResumenTexto = "";
+
+      function escaparHtml(texto){
+        const div = document.createElement("div");
+        div.textContent = texto;
+        return div.innerHTML;
+      }
+
+      function hablarTexto(texto){
+        if(!texto || texto.trim() === ""){
+          return;
+        }
+
+        if(!("speechSynthesis" in window)){
+          estadoVoz.textContent = "Este navegador no soporta síntesis de voz.";
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = "es-ES";
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        const voces = window.speechSynthesis.getVoices();
+        const vozEspanol = voces.find(function(v){
+          return v.lang && v.lang.toLowerCase().startsWith("es");
+        });
+
+        if(vozEspanol){
+          utterance.voice = vozEspanol;
+        }
+
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function ejecutarConsulta(){
+        const mensaje = entrada.value.trim();
+
+        if(mensaje === ""){
+          consulta.textContent = "";
+          resumen.innerHTML = '<div class="error">Debes escribir o dictar una consulta.</div>';
+          resultado.innerHTML = '<div class="panel-seccion"><div class="error">No hay consulta para ejecutar.</div></div>';
+          return;
+        }
+
+        consulta.textContent = "Generando SQL...";
+        resumen.innerHTML = "Generando resumen...";
+        resultado.innerHTML = '<div class="panel-seccion">Consultando base de datos...</div>';
+        ultimoResumenTexto = "";
+
+        fetch("004-back.php?mensaje=" + encodeURIComponent(mensaje))
+          .then(function(res){ return res.json(); })
+          .then(function(datos){
+            consulta.textContent = datos.sql || "";
+
+            if(datos.ok){
+              resumen.innerHTML = datos.summary_html || '<div class="ok">No hay resumen disponible.</div>';
+              resultado.innerHTML = datos.table_html || '<div class="panel-seccion"><div class="ok">No hay tabla disponible.</div></div>';
+              ultimoResumenTexto = datos.summary || "";
+
+              if(ultimoResumenTexto.trim() !== ""){
+                hablarTexto(ultimoResumenTexto);
+              }
+            }else{
+              resumen.innerHTML = '<div class="error">' + escaparHtml(datos.error || "Error desconocido") + '</div>';
+              resultado.innerHTML = '<div class="panel-seccion"><div class="error">' + escaparHtml(datos.error || "Error desconocido") + '</div></div>';
+            }
+          })
+          .catch(function(error){
+            consulta.textContent = "";
+            resumen.innerHTML = '<div class="error">Error en la petición: ' + escaparHtml(error.message) + '</div>';
+            resultado.innerHTML = '<div class="panel-seccion"><div class="error">No se pudo completar la petición.</div></div>';
+          });
+      }
+
+      botonConsultar.onclick = ejecutarConsulta;
+
+      botonLeer.onclick = function(){
+        if(ultimoResumenTexto.trim() !== ""){
+          hablarTexto(ultimoResumenTexto);
+        }
+      };
+
+      entrada.addEventListener("keydown", function(event){
+        if(event.key === "Enter"){
+          ejecutarConsulta();
+        }
+      });
+
+      if("speechSynthesis" in window){
+        window.speechSynthesis.onvoiceschanged = function(){};
+      }
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        recognition.lang = "es-ES";
+        recognition.interimResults = true;
+        recognition.continuous = false;
+
+        let escuchando = false;
+
+        botonVoz.addEventListener("click", function(){
+          if(!escuchando){
+            recognition.start();
+          }else{
+            recognition.stop();
+          }
+        });
+
+        recognition.onstart = function(){
+          escuchando = true;
+          botonVoz.classList.add("activo");
+          estadoVoz.textContent = "Escuchando...";
+        };
+
+        recognition.onresult = function(event){
+          let textoFinal = "";
+          let textoParcial = "";
+
+          for(let i = event.resultIndex; i < event.results.length; i++){
+            if(event.results[i].isFinal){
+              textoFinal += event.results[i][0].transcript;
+            }else{
+              textoParcial += event.results[i][0].transcript;
+            }
+          }
+
+          if(textoFinal.trim() !== ""){
+            entrada.value = textoFinal.trim();
+          }else if(textoParcial.trim() !== ""){
+            entrada.value = textoParcial.trim();
+          }
+        };
+
+        recognition.onerror = function(event){
+          escuchando = false;
+          botonVoz.classList.remove("activo");
+          estadoVoz.textContent = "Error de voz: " + event.error;
+        };
+
+        recognition.onend = function(){
+          const habiaTexto = entrada.value.trim() !== "";
+          escuchando = false;
+          botonVoz.classList.remove("activo");
+          estadoVoz.textContent = "Micrófono inactivo.";
+
+          if(habiaTexto){
+            ejecutarConsulta();
+          }
+        };
+      } else {
+        botonVoz.disabled = true;
+        estadoVoz.textContent = "Este navegador no soporta reconocimiento de voz.";
+      }
+    </script>
+  </body>
+</html>

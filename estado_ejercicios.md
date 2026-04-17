@@ -1,6 +1,6 @@
 # sistemasdegestionempresarial — Estado de ejercicios
 
-Generado: 2026-03-03 19:00
+Generado: 2026-04-17 11:00
 
 ---
 
@@ -103,6 +103,9 @@ Generado: 2026-03-03 19:00
 - 🟢 documentacion — 2026-02-25
 - 🟢 graficas PJ — 2026-02-25
 - 🟢 Modulos en la base de datos — 2026-03-03
+- 🟢 Tipos de vistas — 2026-03-03
+- 🟢 api — 2026-03-03
+- 🟢 api de entrada — 2026-03-03
 
 
 ## Repaso PHP
@@ -110,3 +113,11 @@ Generado: 2026-03-03 19:00
 - 🟢 Repaso inicial — 2026-02-17
 - 🟢 Avanzamos — 2026-02-24
 - 🔴 Conexion con bases de datos
+
+
+## IA en SSGG
+
+- 🔴 Entrenamiento
+- 🔴 Repaso
+- 🔴 MCP
+- 🔴 IA agentica

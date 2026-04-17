@@ -84,10 +84,18 @@
   - [documentacion](#documentacion-1)
   - [graficas PJ](#graficas-pj)
   - [Modulos en la base de datos](#modulos-en-la-base-de-datos)
+  - [Tipos de vistas](#tipos-de-vistas)
+  - [api](#api)
+  - [api de entrada](#api-de-entrada)
 - [Repaso PHP](#repaso-php)
   - [Repaso inicial](#repaso-inicial)
   - [Avanzamos](#avanzamos)
   - [Conexion con bases de datos](#conexion-con-bases-de-datos)
+- [IA en SSGG](#ia-en-ssgg)
+  - [Entrenamiento](#entrenamiento)
+  - [Repaso](#repaso)
+  - [MCP](#mcp)
+  - [IA agentica](#ia-agentica)
 - [.git](#git)
   - [branches](#branches)
   - [hooks](#hooks)
@@ -107,7 +115,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/001-salidas)
 
 ### salidas
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `002-salidas.html`
 
@@ -118,7 +126,7 @@
 ```
 
 ### adevertencias y errores
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `003-adevertencias y errores.html`
 
@@ -131,7 +139,7 @@
 ```
 
 ### document write
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `004-document write.html`
 
@@ -142,7 +150,7 @@
 ```
 
 ### comentarios
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `005-comentarios.html`
 
@@ -163,7 +171,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/002-variables%20y%20constantes)
 
 ### variables
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `006-variables.html`
 
@@ -175,7 +183,7 @@
 ```
 
 ### variar el valor de la variable
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `007-variar el valor de la variable.html`
 
@@ -189,7 +197,7 @@
 ```
 
 ### constantes
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `008-constantes.html`
 
@@ -208,7 +216,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/003-operadores)
 
 ### Operadores artimeticos
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `009-Operadores artimeticos.html`
 
@@ -223,7 +231,7 @@
 ```
 
 ### Operadores
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `009-Operadores.html`
 
@@ -236,7 +244,7 @@
 ```
 
 ### operadores de comparacion
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `010-operadores de comparacion.html`
 
@@ -252,7 +260,7 @@
 ```
 
 ### operadores matematicos
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `011-operadores matematicos.html`
 
@@ -274,7 +282,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/004-estructuras%20de%20datos)
 
 ### arrays
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `012-arrays.html`
 
@@ -292,7 +300,7 @@
 ```
 
 ### arrays indices
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `013-arrays indices.html`
 
@@ -310,7 +318,7 @@
 ```
 
 ### operaciones con arrays
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `014-operaciones con arrays.html`
 
@@ -342,7 +350,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/005-estructuras%20de%20control)
 
 ### estructura for
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `015-estructura for.html`
 
@@ -356,7 +364,7 @@
 ```
 
 ### estructura while
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `016-estructura while.html`
 
@@ -370,7 +378,7 @@
 ```
 
 ### Estructura while pero bien
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `017-Estructura while pero bien.html`
 
@@ -385,7 +393,7 @@
 ```
 
 ### estructura if
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `018-estructura if.html`
 
@@ -399,7 +407,7 @@
 ```
 
 ### clausula else
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `019-clausula else.html`
 
@@ -415,7 +423,7 @@
 ```
 
 ### else if
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `020-else if.html`
 
@@ -435,7 +443,7 @@
 ```
 
 ### switch
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `021-switch.html`
 
@@ -475,7 +483,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/006-funciones)
 
 ### funciones.
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `022-funciones..html`
 
@@ -488,7 +496,7 @@
 ```
 
 ### llamada a la funcion
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `023-llamada a la funcion.html`
 
@@ -509,7 +517,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/007-programacion%20orientada%20a%20objetos)
 
 ### parametro
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `024-parametro.html`
 
@@ -524,7 +532,7 @@
 ```
 
 ### funcion con parametro correcto
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `025-funcion con parametro correcto.html`
 
@@ -539,7 +547,7 @@
 ```
 
 ### varios parametros
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `026-varios parametros.html`
 
@@ -554,7 +562,7 @@
 ```
 
 ### clases
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `027-clases.html`
 
@@ -570,7 +578,7 @@
 ```
 
 ### constructor
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `028-constructor.html`
 
@@ -589,7 +597,7 @@
 ```
 
 ### metodos
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `029-metodos.html`
 
@@ -613,7 +621,7 @@
 ```
 
 ### instanciar un gato
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `030-instanciar un gato.html`
 
@@ -639,7 +647,7 @@
 ```
 
 ### valores
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `031-valores.html`
 
@@ -669,7 +677,7 @@
 ```
 
 ### constructor con parametros
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `032-constructor con parametros.html`
 
@@ -698,7 +706,7 @@
 ```
 
 ### set y get
-<small>Creado: 2025-09-28 22:27</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `033-set y get.html`
 
@@ -739,7 +747,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/008-DOM)
 
 ### escribir
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `101-escribir.html`
 
@@ -756,7 +764,7 @@
 ```
 
 ### leer
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `102-leer.html`
 
@@ -775,7 +783,7 @@
 ```
 
 ### eventos
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `103-eventos.html`
 
@@ -799,7 +807,7 @@
 ```
 
 ### calculadora
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `104-calculadora.html`
 
@@ -832,7 +840,7 @@
 ```
 
 ### clientes
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `105-clientes.html`
 
@@ -934,7 +942,7 @@
 ```
 
 ### Insertar
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `108-Insertar.html`
 
@@ -1051,7 +1059,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/009-Ejercicio%20CRUD%201)
 
 ### ejemplo clientes
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `301-ejemplo clientes.html`
 
@@ -1072,7 +1080,7 @@
 ```
 
 ### ejemplo con estilo
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `302-ejemplo con estilo.html`
 
@@ -1099,7 +1107,7 @@
 ```
 
 ### javascript muy sencillo
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `303-javascript muy sencillo.html`
 
@@ -1135,7 +1143,7 @@
 ```
 
 ### javascript selectores
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `304-javascript selectores.html`
 
@@ -1177,7 +1185,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/000-Prerrequisitos/010-Ejercicio%20CRUD%202)
 
 ### Ejercicio
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `401-Ejercicio.html`
 
@@ -1200,7 +1208,7 @@
 ```
 
 ### Ejercicio
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `402-Ejercicio.html`
 
@@ -1251,7 +1259,7 @@
 ```
 
 ### leer
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `403-leer.html`
 
@@ -1312,7 +1320,7 @@
 ```
 
 ### estilo
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `404-estilo.html`
 
@@ -1591,7 +1599,7 @@
 ```
 
 ### encapsular
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `405-encapsular.html`
 
@@ -1879,7 +1887,7 @@
 ```
 
 ### eliminar
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `406-eliminar.html`
 
@@ -2175,7 +2183,7 @@
 ```
 
 ### Tratamiento de arrays
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `407-Tratamiento de arrays.html`
 
@@ -2483,7 +2491,7 @@
 ```
 
 ### formulario de actualizacion
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `408-formulario de actualizacion.html`
 
@@ -2812,7 +2820,7 @@
 ```
 
 ### persisrtencia
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `409-persisrtencia.html`
 
@@ -3143,7 +3151,7 @@
 ```
 
 ### recuperar memoria
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `410-recuperar memoria.html`
 
@@ -3480,7 +3488,7 @@
 ```
 
 ### clientes
-<small>Creado: 2025-09-28 22:28</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `clientes.json`
 
@@ -3556,7 +3564,7 @@
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/001-Identificaci%C3%B3n%20de%20sistemas%20ERP-CRM/006-Sistemas%20gestores%20de%20bases%20de%20datos%20compatibles%20con%20el%20software)
 
 ### app
-<small>Creado: 2025-10-28 15:48</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `app.py`
 
@@ -3938,7 +3946,7 @@ if __name__ == '__main__':
 ```
 
 ### database
-<small>Creado: 2025-10-28 15:48</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `database.py`
 
@@ -4082,7 +4090,7 @@ def close_db(e=None):
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/001-Identificaci%C3%B3n%20de%20sistemas%20ERP-CRM/007-Instalaci%C3%B3n%20y%20configuraci%C3%B3n%20del%20sistema%20inform%C3%A1tico)
 
 ### servidor
-<small>Creado: 2025-10-01 15:13</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `001-servidor.py`
 
@@ -4091,7 +4099,7 @@ print("Hola mundo")
 ```
 
 ### ahora quiero instalar flask
-<small>Creado: 2025-10-01 15:26</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `002-ahora quiero instalar flask.py`
 
@@ -4108,7 +4116,7 @@ print("Hola mundo")
 ```
 
 ### miniservidor
-<small>Creado: 2025-10-01 15:29</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `003-miniservidor.py`
 
@@ -4126,7 +4134,7 @@ if __name__ == "__main__":
 ```
 
 ### mas html
-<small>Creado: 2025-10-01 15:41</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `004-mas html.py`
 
@@ -4155,7 +4163,7 @@ if __name__ == "__main__":
 ```
 
 ### salidas
-<small>Creado: 2025-10-01 15:52</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `005-salidas.py`
 
@@ -4164,7 +4172,7 @@ print("Esto es una salida en Python")
 ```
 
 ### entradas
-<small>Creado: 2025-10-01 15:55</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `006-entradas.py`
 
@@ -4173,7 +4181,7 @@ input("Introduce tu edad")
 ```
 
 ### podemos entrar cadena
-<small>Creado: 2025-10-01 15:56</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `007-podemos entrar cadena.py`
 
@@ -4182,7 +4190,7 @@ input("Introduce tu nombre")
 ```
 
 ### variables
-<small>Creado: 2025-10-01 15:57</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `008-variables.py`
 
@@ -4191,7 +4199,7 @@ edad = 47
 ```
 
 ### tipos de datos
-<small>Creado: 2025-10-01 15:59</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `009-tipos de datos.py`
 
@@ -4203,7 +4211,7 @@ profesor = True         # Tipo de dato booleano
 ```
 
 ### comentarios
-<small>Creado: 2025-10-01 16:01</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `010-comentarios.py`
 
@@ -4222,7 +4230,7 @@ profesor = True         # Tipo de dato booleano
 ```
 
 ### cambio de tipo de dato
-<small>Creado: 2025-10-01 16:04</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `011-cambio de tipo de dato.py`
 
@@ -4248,7 +4256,7 @@ print(type(edad))
 ```
 
 ### operadores aritmeticos
-<small>Creado: 2025-10-01 16:06</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `012-operadores aritmeticos.py`
 
@@ -4261,7 +4269,7 @@ print(4%3)
 ```
 
 ### operadores de comparacion
-<small>Creado: 2025-10-01 16:31</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `013-operadores de comparacion.py`
 
@@ -4275,7 +4283,7 @@ print(4 != 3)
 ```
 
 ### operadores booleanos
-<small>Creado: 2025-10-01 16:33</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `014-operadores booleanos.py`
 
@@ -4290,7 +4298,7 @@ print(4 == 3 or 3 == 2 or 2 == 1)
 ```
 
 ### if
-<small>Creado: 2025-10-01 16:35</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `015-if.py`
 
@@ -4302,7 +4310,7 @@ if edad < 30:
 ```
 
 ### else
-<small>Creado: 2025-10-01 16:37</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `016-else.py`
 
@@ -4316,7 +4324,7 @@ else:
 ```
 
 ### elif
-<small>Creado: 2025-10-01 16:38</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `017-elif.py`
 
@@ -4334,7 +4342,7 @@ else:
 ```
 
 ### for
-<small>Creado: 2025-10-01 16:41</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `018-for.py`
 
@@ -4344,7 +4352,7 @@ for dia in range(1,31,1):
 ```
 
 ### while
-<small>Creado: 2025-10-01 16:42</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `019-while.py`
 
@@ -4362,7 +4370,7 @@ while dia < 31:
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/001-Identificaci%C3%B3n%20de%20sistemas%20ERP-CRM/008-Verificaci%C3%B3n%20de%20la%20instalaci%C3%B3n%20y%20configuraci%C3%B3n)
 
 ### app
-<small>Creado: 2025-10-08 16:05</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `app.py`
 
@@ -4432,7 +4440,7 @@ if __name__ == "__main__":
 ```
 
 ### app2
-<small>Creado: 2025-10-08 16:15</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `app2.py`
 
@@ -4470,7 +4478,7 @@ if __name__ == "__main__":
 ```
 
 ### app3
-<small>Creado: 2025-10-08 16:24</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `app3.py`
 
@@ -4533,7 +4541,7 @@ if __name__ == "__main__":
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/001-Identificaci%C3%B3n%20de%20sistemas%20ERP-CRM/009-Documentaci%C3%B3n%20de%20las%20operaciones%20realizadas)
 
 ### insertar datos
-<small>Creado: 2025-10-14 19:36</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `002-insertar datos.sql`
 
@@ -4571,7 +4579,7 @@ INSERT INTO productos VALUES(
 ```
 
 ### conectar con base de datos
-<small>Creado: 2025-10-14 19:41</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `003-conectar con base de datos.py`
 
@@ -4586,7 +4594,7 @@ con.close()
 ```
 
 ### pinto ccon flask
-<small>Creado: 2025-10-14 19:48</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `004-pinto ccon flask.py`
 
@@ -4611,7 +4619,7 @@ if __name__ == "__main__":
 ```
 
 ### creo menu de navegacion
-<small>Creado: 2025-10-14 20:02</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `005-creo menu de navegacion.py`
 
@@ -4650,7 +4658,7 @@ if __name__ == "__main__":
 ```
 
 ### tabla
-<small>Creado: 2025-10-14 20:21</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `006-tabla.py`
 
@@ -4704,7 +4712,7 @@ if __name__ == "__main__":
 ```
 
 ### datos de la tabla
-<small>Creado: 2025-10-14 20:24</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `007-datos de la tabla.py`
 
@@ -4766,7 +4774,7 @@ if __name__ == "__main__":
 ```
 
 ### evitar sqlite sequence
-<small>Creado: 2025-10-14 20:38</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `008-evitar sqlite sequence.py`
 
@@ -4829,7 +4837,7 @@ if __name__ == "__main__":
 ```
 
 ### dinamico
-<small>Creado: 2025-10-14 20:42</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `009-dinamico.py`
 
@@ -4957,7 +4965,7 @@ if __name__ == "__main__":
 ```
 
 ### example
-<small>Creado: 2025-10-14 19:41</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `example.db`
 
@@ -4990,7 +4998,7 @@ if __name__ == "__main__":
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/001-Identificaci%C3%B3n%20de%20sistemas%20ERP-CRM/104-Examen%20final)
 
 ### crear tablas
-<small>Creado: 2025-11-12 16:51</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `001-crear tablas.sql`
 
@@ -5017,7 +5025,7 @@ CREATE TABLE Categorias(
 ```
 
 ### insertar
-<small>Creado: 2025-11-12 16:51</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `002-insertar.sql`
 
@@ -5039,7 +5047,7 @@ INSERT INTO Piezas VALUES(
 ```
 
 ### fk
-<small>Creado: 2025-11-12 16:51</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `003-fk.sql`
 
@@ -5052,7 +5060,7 @@ ON UPDATE CASCADE;
 ```
 
 ### selecciones
-<small>Creado: 2025-11-12 16:51</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `004-selecciones.sql`
 
@@ -5063,7 +5071,7 @@ SELECT * FROM Piezas;
 ```
 
 ### left join
-<small>Creado: 2025-11-12 16:51</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `005-left join.sql`
 
@@ -5076,7 +5084,7 @@ ON Piezas.id_categoria = Categorias.Identificador;
 ```
 
 ### ahora creo la vista
-<small>Creado: 2025-11-12 16:51</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `006-ahora creo la vista.sql`
 
@@ -5097,7 +5105,7 @@ SELECT * FROM piezas_y_categorias;
 ```
 
 ### usuario
-<small>Creado: 2025-11-12 16:51</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `007-usuario.sql`
 
@@ -5146,7 +5154,7 @@ FLUSH PRIVILEGES;
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/002-Instalaci%C3%B3n%20y%20configuraci%C3%B3n%20de%20sistemas%20ERP-CRM/002-M%C3%B3dulos%20de%20un%20sistema%20ERP-CRM%20)
 
 ### Pantallas
-<small>Creado: 2025-09-17 16:06</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `001-Pantallas`
 
@@ -5171,7 +5179,7 @@ Ventana kanban
 ```
 
 ### rejilla de clientes
-<small>Creado: 2025-09-17 16:14</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `002-rejilla de clientes.html`
 
@@ -5223,7 +5231,7 @@ Ventana kanban
 ```
 
 ### barra de busqueda
-<small>Creado: 2025-09-17 16:18</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `003-barra de busqueda.html`
 
@@ -5297,7 +5305,7 @@ Ventana kanban
 ```
 
 ### rejilla
-<small>Creado: 2025-09-17 16:21</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `004-rejilla.html`
 
@@ -5620,7 +5628,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/001-Inicio)
 
 ### index
-<small>Creado: 2026-02-17 16:06</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5647,7 +5655,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/002-Login)
 
 ### index
-<small>Creado: 2026-02-17 19:26</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5674,7 +5682,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/003-selector%20de%20modulos)
 
 ### index
-<small>Creado: 2026-02-17 19:59</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5706,7 +5714,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/004-seguridad%20basica)
 
 ### index
-<small>Creado: 2026-02-17 20:21</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5741,7 +5749,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/005-componentes)
 
 ### index
-<small>Creado: 2026-02-18 15:17</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5780,7 +5788,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/006-componente%20tabla)
 
 ### index
-<small>Creado: 2026-02-18 15:46</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5819,7 +5827,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/007-documentacion)
 
 ### index
-<small>Creado: 2026-02-24 15:56</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5858,7 +5866,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/008-navegacion)
 
 ### index
-<small>Creado: 2026-02-24 16:30</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5900,7 +5908,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/009-fusionar)
 
 ### index
-<small>Creado: 2026-02-24 20:10</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5945,7 +5953,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/010-entidades)
 
 ### index
-<small>Creado: 2026-02-25 15:12</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -5990,7 +5998,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/011-modulos)
 
 ### index
-<small>Creado: 2026-02-25 15:22</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -6035,7 +6043,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/012-operaciones)
 
 ### index
-<small>Creado: 2026-02-25 16:25</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -6081,7 +6089,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/013-documentacion)
 
 ### index
-<small>Creado: 2026-03-03 15:09</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -6127,7 +6135,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/014-graficas%20PJ)
 
 ### index
-<small>Creado: 2026-03-03 15:49</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -6173,7 +6181,145 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/015-Modulos%20en%20la%20base%20de%20datos)
 
 ### index
-<small>Creado: 2026-03-03 16:35</small>
+<small>Creado: 2026-04-15 15:36</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  require_once "util/helpers.php";   // ✅ AÑADIR ESTO
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+  include "interfaces/modulo.php";
+}else{
+  include "interfaces/selectormodulos.php";
+}
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="tipos-de-vistas"></a>
+## Tipos de vistas
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/016-Tipos%20de%20vistas)
+
+### index
+<small>Creado: 2026-04-15 15:36</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  require_once "util/helpers.php";   // ✅ AÑADIR ESTO
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+  include "interfaces/modulo.php";
+}else{
+  include "interfaces/selectormodulos.php";
+}
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="api"></a>
+## api
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/017-api)
+
+### index
+<small>Creado: 2026-04-15 15:36</small>
+
+`index.php`
+
+```
+<?php
+	session_start(); 
+  require_once "util/helpers.php";   // ✅ AÑADIR ESTO
+  include "util/saneador.php";
+?>
+<!doctype html>
+<html lang="es">
+	<head>
+  	<title>SSGG</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="base/estilo/comun.css">
+  </head>
+  <body>
+  	
+    <main>
+    <?php
+    
+    	// Router //////////////////////////////////////////////////////
+      
+    	if(!isset($_SESSION['usuario'])){					// Si no existe la variable de sesion usuario
+      	include "interfaces/login.php";					// Carga el login para que pueda iniciar sesion
+      }else{
+      	if(isset($_GET['modulo'])){
+  include "interfaces/modulo.php";
+}else{
+  include "interfaces/selectormodulos.php";
+}
+      }
+    ?>
+    </main>
+  </body>
+</html>
+```
+
+
+<a id="api-de-entrada"></a>
+## api de entrada
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/006-Proyecto%20trimestral/018-api%20de%20entrada)
+
+### index
+<small>Creado: 2026-04-15 15:36</small>
 
 `index.php`
 
@@ -6223,7 +6369,7 @@ Ventana kanban
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/007-Repaso%20PHP/001-Repaso%20inicial)
 
 ### salidas
-<small>Creado: 2026-02-17 19:31</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `001-salidas.php`
 
@@ -6234,7 +6380,7 @@ Ventana kanban
 ```
 
 ### embebido
-<small>Creado: 2026-02-17 19:32</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `002-embebido.php`
 
@@ -6249,7 +6395,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### multiembebido
-<small>Creado: 2026-02-17 19:32</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `003-multiembebido.php`
 
@@ -6268,7 +6414,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### PHP hace calculos
-<small>Creado: 2026-02-17 19:33</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `004-PHP hace calculos.php`
 
@@ -6283,7 +6429,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### variables
-<small>Creado: 2026-02-17 19:34</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `005-variables.php`
 
@@ -6295,7 +6441,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### operadores aritmeticos
-<small>Creado: 2026-02-17 19:35</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `006-operadores aritmeticos.php`
 
@@ -6313,7 +6459,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### estructuras condicionales
-<small>Creado: 2026-02-17 19:36</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `007-estructuras condicionales.php`
 
@@ -6330,7 +6476,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### clausula else
-<small>Creado: 2026-02-17 19:37</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `008-clausula else.php`
 
@@ -6349,7 +6495,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### else if
-<small>Creado: 2026-02-17 19:37</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `009-else if.php`
 
@@ -6372,7 +6518,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### switch
-<small>Creado: 2026-02-17 19:39</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `010-switch.php`
 
@@ -6415,7 +6561,7 @@ Y esto vuelve a ser HTML
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/007-Repaso%20PHP/002-Avanzamos)
 
 ### programacion funcional
-<small>Creado: 2026-02-24 15:15</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `001-programacion funcional.php`
 
@@ -6428,7 +6574,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### llamo a la funcion
-<small>Creado: 2026-02-24 15:17</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `002-llamo a la funcion.php`
 
@@ -6442,7 +6588,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### return en la salida
-<small>Creado: 2026-02-24 15:20</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `003-return en la salida.php`
 
@@ -6456,7 +6602,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### entrada mal
-<small>Creado: 2026-02-24 15:21</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `004-entrada mal.php`
 
@@ -6471,7 +6617,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### parametros de entrada
-<small>Creado: 2026-02-24 15:24</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `005-parametros de entrada.php`
 
@@ -6485,7 +6631,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### clases
-<small>Creado: 2026-02-24 15:30</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `006-clases.php`
 
@@ -6501,7 +6647,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### metodos
-<small>Creado: 2026-02-24 15:33</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `007-metodos.php`
 
@@ -6526,7 +6672,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### ejemplo del problema
-<small>Creado: 2026-02-24 15:37</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `008-ejemplo del problema.php`
 
@@ -6552,7 +6698,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### setters y getters
-<small>Creado: 2026-02-24 15:40</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `009-setters y getters.php`
 
@@ -6584,7 +6730,7 @@ Y esto vuelve a ser HTML
 ```
 
 ### validacion
-<small>Creado: 2026-02-24 15:42</small>
+<small>Creado: 2026-04-15 15:36</small>
 
 `010-validacion.php`
 
@@ -6634,6 +6780,34 @@ echo "El gato tiene ".$gato1->getEdad()." años";
 ## Conexion con bases de datos
 
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/007-Repaso%20PHP/003-Conexion%20con%20bases%20de%20datos)
+
+
+
+<a id="ia-en-ssgg"></a>
+# IA en SSGG
+
+<a id="entrenamiento"></a>
+## Entrenamiento
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/001-Entrenamiento)
+
+
+<a id="repaso"></a>
+## Repaso
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/002-Repaso)
+
+
+<a id="mcp"></a>
+## MCP
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/003-MCP)
+
+
+<a id="ia-agentica"></a>
+## IA agentica
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/004-IA%20agentica)
 
 
 
