@@ -96,6 +96,7 @@
   - [Repaso](#repaso)
   - [MCP](#mcp)
   - [IA agentica](#ia-agentica)
+  - [RAG](#rag)
 - [.git](#git)
   - [branches](#branches)
   - [hooks](#hooks)
@@ -6808,6 +6809,12 @@ echo "El gato tiene ".$gato1->getEdad()." años";
 ## IA agentica
 
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/004-IA%20agentica)
+
+
+<a id="rag"></a>
+## RAG
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/005-RAG)
 
 
 
