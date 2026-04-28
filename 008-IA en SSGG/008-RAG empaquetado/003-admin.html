@@ -1,0 +1,328 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin RAG</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f6fb;
+        color: #222;
+      }
+
+      main {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 260px 1fr;
+      }
+
+      aside {
+        background: white;
+        border-right: 1px solid #dde2ee;
+        padding: 24px;
+      }
+
+      aside h1 {
+        margin: 0 0 24px 0;
+        font-size: 22px;
+        color: #2563eb;
+      }
+
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav a {
+        padding: 12px;
+        border-radius: 12px;
+        color: #334155;
+        text-decoration: none;
+      }
+
+      nav a:hover,
+      nav a.activo {
+        background: #eef2ff;
+        color: #2563eb;
+      }
+
+      section {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      article {
+        background: white;
+        border: 1px solid #dde2ee;
+        border-radius: 16px;
+        padding: 20px;
+      }
+
+      h2 {
+        margin: 0 0 16px 0;
+        font-size: 20px;
+      }
+
+      h3 {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+      }
+
+      input,
+      button,
+      textarea {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 12px;
+        font-size: 15px;
+      }
+
+      button {
+        background: #2563eb;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button.secundario {
+        background: #eef2ff;
+        color: #2563eb;
+      }
+
+      form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .login {
+        max-width: 420px;
+        margin: 40px auto;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .dato {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 16px;
+      }
+
+      .dato strong {
+        display: block;
+        font-size: 26px;
+        color: #2563eb;
+      }
+
+      .acciones {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .barra {
+        width: 100%;
+        height: 18px;
+        background: #e2e8f0;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progreso {
+        width: 62%;
+        height: 100%;
+        background: #2563eb;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+        text-align: left;
+      }
+
+      th {
+        color: #64748b;
+        font-size: 14px;
+      }
+
+      .estado {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #dcfce7;
+        color: #166534;
+        font-size: 13px;
+      }
+
+      @media (max-width: 800px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+
+        aside {
+          border-right: none;
+          border-bottom: 1px solid #dde2ee;
+        }
+
+        .grid,
+        .acciones {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <article class="login">
+      <h2>Acceso al administrador</h2>
+
+      <form>
+        <input type="email" placeholder="Correo electrónico">
+        <input type="password" placeholder="Contraseña">
+        <button>Entrar</button>
+      </form>
+    </article>
+
+    <main>
+      <aside>
+        <h1>jocarsa | rag</h1>
+
+        <nav>
+          <a href="#" class="activo">Dashboard</a>
+          <a href="#">Subir documentos</a>
+          <a href="#">Entrenamiento RAG</a>
+          <a href="#">Progreso</a>
+          <a href="#">Indexaciones</a>
+        </nav>
+      </aside>
+
+      <section>
+
+        <article>
+          <h2>Dashboard</h2>
+
+          <div class="grid">
+            <div class="dato">
+              <strong>24</strong>
+              Documentos subidos
+            </div>
+
+            <div class="dato">
+              <strong>8</strong>
+              Indexaciones realizadas
+            </div>
+
+            <div class="dato">
+              <strong>62%</strong>
+              Entrenamiento actual
+            </div>
+          </div>
+        </article>
+
+        <article>
+          <h2>Subir documentos</h2>
+
+          <form>
+            <input type="file">
+            <textarea placeholder="Notas internas sobre este material"></textarea>
+            <button>Subir documento</button>
+          </form>
+        </article>
+
+        <article>
+          <h2>Entrenamiento RAG</h2>
+
+          <p>
+            Inicia una nueva indexación o continúa el entrenamiento con el material ya subido por el usuario.
+          </p>
+
+          <div class="acciones">
+            <button>Iniciar entrenamiento</button>
+            <button class="secundario">Continuar entrenamiento</button>
+          </div>
+        </article>
+
+        <article>
+          <h2>Progreso</h2>
+
+          <h3>Procesando documentos</h3>
+
+          <div class="barra">
+            <div class="progreso"></div>
+          </div>
+
+          <p>62% completado. 15 de 24 documentos procesados.</p>
+        </article>
+
+        <article>
+          <h2>Indexaciones realizadas</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Documentos</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Material SQL</td>
+                <td>6</td>
+                <td><span class="estado">Completada</span></td>
+                <td>28/04/2026</td>
+                <td>Ver · Editar · Borrar</td>
+              </tr>
+
+              <tr>
+                <td>2</td>
+                <td>Curso Ubuntu Server</td>
+                <td>12</td>
+                <td><span class="estado">Completada</span></td>
+                <td>27/04/2026</td>
+                <td>Ver · Editar · Borrar</td>
+              </tr>
+
+              <tr>
+                <td>3</td>
+                <td>Documentación Moodle</td>
+                <td>4</td>
+                <td><span class="estado">Completada</span></td>
+                <td>26/04/2026</td>
+                <td>Ver · Editar · Borrar</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+      </section>
+    </main>
+
+  </body>
+</html>

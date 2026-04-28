@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegisFP · Consultas legislativas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <main class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">§</div>
+                <div>
+                    <h1>LegisFP</h1>
+                    <p>Consulta normativa de ASIR, DAM, DAW y SMR</p>
+                </div>
+            </div>
+
+            <section class="side-card">
+                <h2>Ejemplos</h2>
+                <div class="quick-prompts">
+                    <button class="quick-prompt" data-prompt="¿Cuál es la duración del ciclo DAW?">Duración de DAW</button>
+                    <button class="quick-prompt" data-prompt="¿Qué dice el artículo 5 de ASIR?">Artículo 5 de ASIR</button>
+                    <button class="quick-prompt" data-prompt="¿Cuáles son los módulos profesionales de SMR?">Módulos de SMR</button>
+                    <button class="quick-prompt" data-prompt="Compara la competencia general de DAM y DAW">Comparar DAM y DAW</button>
+                    <button class="quick-prompt" data-prompt="¿En qué artículo aparece la competencia general de DAW?">Competencia general de DAW</button>
+                </div>
+            </section>
+
+            <section class="side-card compact-card">
+                <h2>Consejos</h2>
+                <ul class="tips">
+                    <li>Usa el nombre corto del ciclo: ASIR, DAM, DAW o SMR.</li>
+                    <li>Puedes preguntar por artículos, módulos, duración, nivel o competencias.</li>
+                    <li>También puedes comparar dos ciclos.</li>
+                </ul>
+            </section>
+        </aside>
+
+        <section class="main-panel">
+            <header class="topbar">
+                <div>
+                    <h2>Asistente legislativo</h2>
+                    <p>Resultados con contexto recuperado desde ChromaDB y síntesis con Ollama.</p>
+                </div>
+
+                <button id="clearChatBtn" class="ghost-button" type="button">
+                    Limpiar conversación
+                </button>
+            </header>
+
+            <section id="chatArea" class="chat-area">
+                <div class="welcome-card">
+                    <div class="welcome-badge">Normativa FP</div>
+                    <h3>Haz una consulta sobre ciclos formativos</h3>
+                    <p>
+                        Puedes preguntar por duración, competencias, artículos, módulos profesionales,
+                        entorno profesional, cualificaciones o diferencias entre ciclos.
+                    </p>
+                </div>
+            </section>
+
+            <footer class="composer">
+                <div class="composer-box">
+                    <textarea
+                        id="pregunta"
+                        class="composer-input"
+                        placeholder="Escribe tu pregunta… Ejemplo: ¿Cuáles son los módulos profesionales de DAW?"
+                        rows="1"
+                    ></textarea>
+
+                    <div class="composer-actions">
+                        <div class="hint">
+                            Enter para enviar · Shift+Enter para nueva línea
+                        </div>
+                        <button id="btnPreguntar" class="primary-button" type="button">
+                            Preguntar
+                        </button>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </main>
+
+    <template id="userMessageTemplate">
+        <article class="message-row user-row">
+            <div class="message user-message">
+                <div class="message-label">Tu consulta</div>
+                <div class="message-text"></div>
+            </div>
+        </article>
+    </template>
+
+    <template id="assistantMessageTemplate">
+        <article class="message-row assistant-row">
+            <div class="message assistant-message">
+                <div class="message-head">
+                    <div>
+                        <div class="message-label">Respuesta</div>
+                        <div class="message-subtitle">Síntesis basada en contexto normativo recuperado</div>
+                    </div>
+                    <button class="toggle-sources-btn" type="button">Ver fuentes</button>
+                </div>
+
+                <div class="message-text assistant-response"></div>
+
+                <div class="meta-panel hidden">
+                    <div class="meta-block">
+                        <h4>Consultas usadas</h4>
+                        <div class="queries-list"></div>
+                    </div>
+
+                    <div class="meta-block">
+                        <h4>Fragmentos recuperados</h4>
+                        <div class="sources-list"></div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <template id="loadingTemplate">
+        <article class="message-row assistant-row loading-row">
+            <div class="message assistant-message loading-message">
+                <div class="message-label">Procesando</div>
+                <div class="typing">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="loading-text">Buscando contexto normativo y generando respuesta…</div>
+            </div>
+        </article>
+    </template>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

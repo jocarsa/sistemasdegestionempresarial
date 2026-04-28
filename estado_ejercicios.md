@@ -1,6 +1,6 @@
 # sistemasdegestionempresarial — Estado de ejercicios
 
-Generado: 2026-04-21 19:00
+Generado: 2026-04-28 16:00
 
 ---
 
@@ -122,3 +122,6 @@ Generado: 2026-04-21 19:00
 - 🔴 MCP
 - 🔴 IA agentica
 - 🔴 RAG
+- 🔴 RAG mas IA
+- 🔴 Repaso deploy
+- 🔴 RAG empaquetado

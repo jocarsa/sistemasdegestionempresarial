@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Asistente IA</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f6fb;
+        color: #222;
+      }
+
+      main {
+        width: 100%;
+        max-width: 720px;
+        height: 100vh;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      section {
+        flex: 1;
+        padding: 20px;
+        background: white;
+        border: 1px solid #dde2ee;
+        border-radius: 16px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      article {
+        max-width: 75%;
+        padding: 12px 14px;
+        border-radius: 14px;
+        line-height: 1.4;
+        background: #eef2ff;
+      }
+
+      article:nth-child(even) {
+        align-self: flex-end;
+        background: #2563eb;
+        color: white;
+      }
+
+      article:nth-child(odd) {
+        align-self: flex-start;
+      }
+
+      input {
+        width: 100%;
+        padding: 16px;
+        border: 1px solid #cbd5e1;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: #2563eb;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <article>
+          Hola, soy tu asistente IA. ¿En qué puedo ayudarte?
+        </article>
+        <article>
+          Quiero preparar una página sencilla para un chatbot.
+        </article>
+        <article>
+          Perfecto. Podemos crear una interfaz limpia, clara y fácil de adaptar.
+        </article>
+        <article>
+          Me interesa que el HTML siga siendo muy simple.
+        </article>
+      </section>
+
+      <input type="text" placeholder="Escribe tu mensaje...">
+    </main>
+  </body>
+</html>

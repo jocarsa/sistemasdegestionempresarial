@@ -97,6 +97,9 @@
   - [MCP](#mcp)
   - [IA agentica](#ia-agentica)
   - [RAG](#rag)
+  - [RAG mas IA](#rag-mas-ia)
+  - [Repaso deploy](#repaso-deploy)
+  - [RAG empaquetado](#rag-empaquetado)
 - [.git](#git)
   - [branches](#branches)
   - [hooks](#hooks)
@@ -6815,6 +6818,24 @@ echo "El gato tiene ".$gato1->getEdad()." años";
 ## RAG
 
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/005-RAG)
+
+
+<a id="rag-mas-ia"></a>
+## RAG mas IA
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/006-RAG%20mas%20IA)
+
+
+<a id="repaso-deploy"></a>
+## Repaso deploy
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/007-Repaso%20deploy)
+
+
+<a id="rag-empaquetado"></a>
+## RAG empaquetado
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/008-RAG%20empaquetado)
 
 
 
