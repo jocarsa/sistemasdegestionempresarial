@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>{{ app_name }}</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: Ubuntu, Arial, sans-serif;
+    color: #222;
+}
+
+#stage {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at center, rgba(0,0,0,0.08), transparent 42%),
+        #ffffff;
+    perspective: 950px;
+    perspective-origin: center center;
+}
+
+#world {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.cell {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    margin-top: -12px;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #000000;
+    box-shadow:
+        0 0 8px rgba(255,255,255,0.95),
+        0 0 18px rgba(255,255,255,0.75),
+        0 0 28px rgba(0,0,0,0.28);
+    transform: scale(1);
+    transition: transform 0.55s cubic-bezier(.34,1.56,.64,1);
+    will-change: transform;
+}
+
+#result-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: min(780px, calc(100vw - 44px));
+    max-height: 42vh;
+    padding: 22px 26px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 55px rgba(0,0,0,0.18);
+    z-index: 30;
+    opacity: 0;
+    pointer-events: none;
+    overflow-y: auto;
+    transition:
+        opacity 0.35s ease,
+        max-height 0.55s ease,
+        min-height 0.55s ease,
+        padding 0.55s ease,
+        transform 0.35s ease;
+}
+
+#result-window.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#result-window.loading {
+    width: auto;
+    min-width: 210px;
+    padding: 16px 22px;
+    overflow: hidden;
+}
+
+#result-window.expanded {
+    min-height: 120px;
+    max-height: 52vh;
+    padding: 26px 32px;
+}
+
+#result-content {
+    font-size: 18px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+.loading-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid rgba(0,0,0,0.16);
+    border-top-color: #111;
+    animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.cursor {
+    display: inline-block;
+    width: 9px;
+    height: 1.1em;
+    background: #333;
+    vertical-align: middle;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 45% { opacity: 1; }
+    46%, 100% { opacity: 0; }
+}
+
+#input-panel {
+    position: fixed;
+    left: 50%;
+    bottom: 34px;
+    transform: translateX(-50%);
+    width: min(760px, calc(100vw - 44px));
+    z-index: 40;
+}
+
+#input-box {
+    display: flex;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.86);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 55px rgba(0,0,0,0.22);
+}
+
+#texto {
+    flex: 1;
+    border: 1px solid #ddd;
+    outline: none;
+    border-radius: 15px;
+    padding: 15px 18px;
+    font-size: 16px;
+    background: #ffffff;
+    font-family: Ubuntu, Arial, sans-serif;
+}
+
+#boton {
+    border: none;
+    border-radius: 15px;
+    padding: 0 24px;
+    font-size: 16px;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+    font-family: Ubuntu, Arial, sans-serif;
+}
+
+#boton:hover {
+    background: #000;
+}
+
+#boton:disabled,
+#texto:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+#info {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+}
+
+#hint {
+    position: fixed;
+    top: 24px;
+    right: 28px;
+    z-index: 20;
+    font-size: 33px;
+    color: rgba(0,0,0,0.45);
+    font-weight: bold;
+}
+
+#login-link {
+    position: fixed;
+    top: 28px;
+    left: 28px;
+    z-index: 50;
+    color: rgba(0,0,0,0.62);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+
+#login-link:hover {
+    color: #000;
+    background: #fff;
+}
+
+@media (max-width: 700px) {
+    #input-box {
+        flex-direction: column;
+    }
+
+    #boton {
+        padding: 14px;
+    }
+
+    #result-content {
+        font-size: 16px;
+    }
+
+    #hint {
+        font-size: 22px;
+        right: 18px;
+    }
+
+    #login-link {
+        top: 18px;
+        left: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<a id="login-link" href="/login">Administrar</a>
+
+<div id="stage">
+    <div id="world"></div>
+</div>
+
+<div id="hint">{{ app_name }}</div>
+
+<div id="result-window">
+    <div id="result-content"></div>
+</div>
+
+<div id="input-panel">
+    <div id="input-box">
+        <input id="texto" value="" autocomplete="off" placeholder="Escribe una pregunta...">
+        <button id="boton" onclick="consultar()">Enviar</button>
+    </div>
+    <div id="info">Escribe y pulsa espacio para previsualizar neuronas. Enter para enviar.</div>
+</div>
+
+<script>
+const stage = document.getElementById("stage");
+const world = document.getElementById("world");
+const resultWindow = document.getElementById("result-window");
+const resultContent = document.getElementById("result-content");
+const boton = document.getElementById("boton");
+const inputTexto = document.getElementById("texto");
+const info = document.getElementById("info");
+
+const INTENSITY = 8;
+const INITIAL_NEURONS = 768;
+
+let writingTimer = null;
+
+let cameraZ = 0;
+let rotationX = -12;
+let rotationY = 0;
+
+let targetRotationX = rotationX;
+let targetRotationY = rotationY;
+
+let dragging = false;
+let lastMouseX = 0;
+let lastMouseY = 0;
+
+let previewTimer = null;
+let lastPreviewText = "";
+let previewBusy = false;
+let pendingPreview = false;
+
+function fibonacciSphere(count, radius) {
+    const points = [];
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+
+    if (count <= 1) {
+        return [{ x: 0, y: 0, z: 0 }];
+    }
+
+    for (let i = 0; i < count; i++) {
+        const y = 1 - (i / (count - 1)) * 2;
+        const radial = Math.sqrt(1 - y * y);
+        const theta = goldenAngle * i;
+
+        points.push({
+            x: Math.cos(theta) * radial * radius,
+            y: y * radius,
+            z: Math.sin(theta) * radial * radius
+        });
+    }
+
+    return points;
+}
+
+function getSphereRadius() {
+    return Math.min(window.innerWidth, window.innerHeight) * 0.32;
+}
+
+function applyCamera() {
+    world.style.transform = `
+        translateZ(${cameraZ}px)
+        rotateX(${rotationX}deg)
+        rotateY(${rotationY}deg)
+    `;
+}
+
+function rotatePointLikeWorld(x, y, z) {
+    const rx = rotationX * Math.PI / 180;
+    const ry = rotationY * Math.PI / 180;
+
+    const cosY = Math.cos(ry);
+    const sinY = Math.sin(ry);
+
+    const x1 = x * cosY + z * sinY;
+    const y1 = y;
+    const z1 = -x * sinY + z * cosY;
+
+    const cosX = Math.cos(rx);
+    const sinX = Math.sin(rx);
+
+    const y2 = y1 * cosX - z1 * sinX;
+    const z2 = y1 * sinX + z1 * cosX;
+
+    return { x: x1, y: y2, z: z2 };
+}
+
+function updateBillboards() {
+    const radius = getSphereRadius();
+    const cells = document.querySelectorAll(".cell");
+
+    cells.forEach(cell => {
+        const x = parseFloat(cell.dataset.x || "0");
+        const y = parseFloat(cell.dataset.y || "0");
+        const z = parseFloat(cell.dataset.z || "0");
+
+        const rotated = rotatePointLikeWorld(x, y, z);
+
+        let depth = (rotated.z + radius) / (radius * 2);
+        depth = Math.max(0, Math.min(1, depth));
+
+        cell.style.transform = `
+            translate3d(${x}px, ${y}px, ${z}px)
+            rotateY(${-rotationY}deg)
+            rotateX(${-rotationX}deg)
+        `;
+
+        cell.style.opacity = String(0.15 + depth * 0.85);
+        cell.style.zIndex = String(Math.round(depth * 100000));
+    });
+}
+
+function animateCamera() {
+    rotationX += (targetRotationX - rotationX) * 0.08;
+    rotationY += (targetRotationY - rotationY) * 0.08;
+
+    if (!dragging) {
+        targetRotationY += 0.08;
+    }
+
+    applyCamera();
+    updateBillboards();
+
+    requestAnimationFrame(animateCamera);
+}
+
+function crearNeuronasIniciales(total) {
+    world.innerHTML = "";
+
+    const radius = getSphereRadius();
+    const positions = fibonacciSphere(total, radius);
+
+    positions.forEach((pos, i) => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.dataset.x = String(pos.x);
+        cell.dataset.y = String(pos.y);
+        cell.dataset.z = String(pos.z);
+
+        const circle = document.createElement("div");
+        circle.className = "circle";
+        circle.dataset.index = String(i);
+        circle.dataset.scale = "1";
+        circle.style.transform = "scale(1)";
+        circle.title = `#${i}`;
+
+        cell.appendChild(circle);
+        world.appendChild(cell);
+    });
+
+    updateBillboards();
+}
+
+function recolocar(total) {
+    const radius = getSphereRadius();
+    const positions = fibonacciSphere(total, radius);
+
+    positions.forEach((pos, i) => {
+        const circle = document.querySelector(`.circle[data-index="${i}"]`);
+        if (!circle) return;
+
+        const cell = circle.parentElement;
+        cell.dataset.x = String(pos.x);
+        cell.dataset.y = String(pos.y);
+        cell.dataset.z = String(pos.z);
+    });
+
+    updateBillboards();
+}
+
+function pintarEmbedding(values) {
+    const radius = getSphereRadius();
+    const positions = fibonacciSphere(values.length, radius);
+
+    values.forEach((value, i) => {
+        let circle = document.querySelector(`.circle[data-index="${i}"]`);
+
+        if (!circle) {
+            const cell = document.createElement("div");
+            cell.className = "cell";
+
+            circle = document.createElement("div");
+            circle.className = "circle";
+            circle.dataset.index = String(i);
+
+            cell.appendChild(circle);
+            world.appendChild(cell);
+        }
+
+        const pos = positions[i];
+        const cell = circle.parentElement;
+
+        cell.dataset.x = String(pos.x);
+        cell.dataset.y = String(pos.y);
+        cell.dataset.z = String(pos.z);
+
+        const amplified = Math.max(-1, Math.min(1, value * INTENSITY));
+        const normalized = (amplified + 1) / 2;
+        const scale = 0.45 + Math.pow(normalized, 1.8) * 2.2;
+
+        circle.dataset.scale = String(scale);
+        circle.style.transitionDelay = `${Math.min(i * 2, 600)}ms`;
+        circle.style.transform = `scale(${scale})`;
+        circle.title = `#${i}: ${value}`;
+    });
+
+    const extraCircles = document.querySelectorAll(".circle");
+
+    extraCircles.forEach(circle => {
+        const index = Number(circle.dataset.index || "0");
+
+        if (index >= values.length) {
+            const cell = circle.parentElement;
+
+            if (cell) {
+                cell.remove();
+            }
+        }
+    });
+
+    updateBillboards();
+}
+
+function ocultarResultado() {
+    if (writingTimer) {
+        clearInterval(writingTimer);
+        writingTimer = null;
+    }
+
+    resultWindow.classList.remove("visible", "loading", "expanded");
+    resultContent.innerHTML = "";
+}
+
+function mostrarCargando() {
+    if (writingTimer) {
+        clearInterval(writingTimer);
+        writingTimer = null;
+    }
+
+    resultWindow.classList.remove("expanded");
+    resultWindow.classList.add("visible", "loading");
+
+    resultContent.innerHTML = `
+        <div class="loading-row">
+            <div class="spinner"></div>
+            <div>Generando respuesta...</div>
+        </div>
+    `;
+}
+
+function escribirRespuesta(texto) {
+    if (writingTimer) {
+        clearInterval(writingTimer);
+        writingTimer = null;
+    }
+
+    resultWindow.classList.remove("loading");
+    resultWindow.classList.add("visible", "expanded");
+
+    resultContent.innerHTML = "";
+
+    const content = document.createElement("span");
+    const cursor = document.createElement("span");
+    cursor.className = "cursor";
+
+    resultContent.appendChild(content);
+    resultContent.appendChild(cursor);
+
+    let i = 0;
+    const speed = 12;
+
+    writingTimer = setInterval(() => {
+        if (i >= texto.length) {
+            clearInterval(writingTimer);
+            writingTimer = null;
+            cursor.remove();
+            return;
+        }
+
+        const chunk = texto.slice(i, i + 2);
+        content.textContent += chunk;
+        i += 2;
+
+        resultWindow.scrollTop = resultWindow.scrollHeight;
+    }, speed);
+}
+
+async function obtenerEmbedding(texto) {
+    const response = await fetch("/api/embed", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            texto: texto
+        })
+    });
+
+    const data = await response.json();
+
+    if (data.status !== "ok") {
+        throw new Error(data.message || "embedding inválido");
+    }
+
+    if (!Array.isArray(data.embedding)) {
+        throw new Error("embedding no válido");
+    }
+
+    return data.embedding;
+}
+
+async function previsualizarEmbedding() {
+    const texto = inputTexto.value.trim();
+
+    if (!texto) return;
+    if (texto === lastPreviewText) return;
+
+    if (previewBusy) {
+        pendingPreview = true;
+        return;
+    }
+
+    previewBusy = true;
+    pendingPreview = false;
+    lastPreviewText = texto;
+
+    info.textContent = `Actualizando neuronas para: "${texto}"...`;
+
+    try {
+        const values = await obtenerEmbedding(texto);
+        pintarEmbedding(values);
+
+        info.textContent = `"${texto}" · ${values.length} dimensiones · neuronas actualizadas`;
+    } catch (e) {
+        info.textContent = "Error preview embedding: " + e.message;
+    } finally {
+        previewBusy = false;
+
+        if (pendingPreview && inputTexto.value.trim() !== lastPreviewText) {
+            previsualizarEmbedding();
+        }
+    }
+}
+
+function programarPreviewEmbedding() {
+    clearTimeout(previewTimer);
+
+    previewTimer = setTimeout(() => {
+        previsualizarEmbedding();
+    }, 120);
+}
+
+async function consultar() {
+    const texto = inputTexto.value.trim();
+
+    if (!texto) return;
+
+    clearTimeout(previewTimer);
+
+    boton.disabled = true;
+    inputTexto.disabled = true;
+
+    info.textContent = "Generando embedding local...";
+    mostrarCargando();
+
+    try {
+        const values = await obtenerEmbedding(texto);
+        pintarEmbedding(values);
+        lastPreviewText = texto;
+
+        info.textContent = `"${texto}" · ${values.length} dimensiones · consultando RAG...`;
+
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                consulta: texto
+            })
+        });
+
+        const data = await response.json();
+
+        info.textContent = `"${texto}" · respuesta generada`;
+
+        escribirRespuesta(data.respuesta || "No se obtuvo respuesta.");
+
+    } catch (e) {
+        info.textContent = "Error: " + e.message;
+        escribirRespuesta("Error: " + e.message);
+    } finally {
+        boton.disabled = false;
+        inputTexto.disabled = false;
+        inputTexto.focus();
+    }
+}
+
+stage.addEventListener("wheel", e => {
+    e.preventDefault();
+
+    cameraZ += e.deltaY * -0.6;
+    cameraZ = Math.max(-650, Math.min(850, cameraZ));
+
+    applyCamera();
+    updateBillboards();
+}, { passive: false });
+
+stage.addEventListener("mousedown", e => {
+    dragging = true;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+});
+
+window.addEventListener("mouseup", () => {
+    dragging = false;
+});
+
+window.addEventListener("mousemove", e => {
+    if (!dragging) return;
+
+    const dx = e.clientX - lastMouseX;
+    const dy = e.clientY - lastMouseY;
+
+    targetRotationY += dx * 0.35;
+    targetRotationX -= dy * 0.35;
+
+    targetRotationX = Math.max(-80, Math.min(80, targetRotationX));
+
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+});
+
+window.addEventListener("resize", () => {
+    const circles = document.querySelectorAll(".circle");
+    recolocar(circles.length);
+});
+
+inputTexto.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        consultar();
+        return;
+    }
+
+    if (e.key === " ") {
+        programarPreviewEmbedding();
+    }
+});
+
+inputTexto.addEventListener("input", () => {
+    ocultarResultado();
+
+    clearTimeout(previewTimer);
+
+    if (inputTexto.value.endsWith(" ")) {
+        programarPreviewEmbedding();
+    }
+});
+
+crearNeuronasIniciales(INITIAL_NEURONS);
+applyCamera();
+animateCamera();
+inputTexto.focus();
+</script>
+
+</body>
+</html>

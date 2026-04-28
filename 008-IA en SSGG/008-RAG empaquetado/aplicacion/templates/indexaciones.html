@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<article>
+  <h2>Indexaciones realizadas</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Entrenamiento</th>
+        <th>Documento</th>
+        <th>Chunks</th>
+        <th>Estado</th>
+        <th>Colección ChromaDB</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for fila in filas %}
+      <tr>
+        <td>{{ fila.id }}</td>
+        <td>{{ fila.entrenamiento }}</td>
+        <td>{{ fila.nombre_original }}</td>
+        <td>{{ fila.chunks }}</td>
+        <td>
+          <span class="estado {{ fila.estado|lower }}">
+            {{ fila.estado }}
+          </span>
+        </td>
+        <td>{{ fila.coleccion_chroma }}</td>
+        <td>{{ fila.creado_en[:10] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</article>
+
+{% endblock %}

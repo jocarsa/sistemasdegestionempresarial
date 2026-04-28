@@ -1,6 +1,6 @@
 # sistemasdegestionempresarial — Estado de ejercicios
 
-Generado: 2026-04-28 16:00
+Generado: 2026-04-28 19:00
 
 ---
 
