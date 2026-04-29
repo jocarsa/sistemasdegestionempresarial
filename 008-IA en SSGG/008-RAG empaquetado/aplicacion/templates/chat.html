@@ -62,6 +62,49 @@ body {
     will-change: transform;
 }
 
+#mindmap-window {
+    position: fixed;
+    inset: 0;
+    z-index: 24;
+    pointer-events: none;
+}
+
+#mindmap-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.mindmap-line {
+    stroke: rgba(0,0,0,0.22);
+    stroke-width: 5;
+}
+
+.mindmap-node {
+    fill: rgba(255,255,255,0.9);
+    stroke: rgba(0,0,0,0.32);
+    stroke-width: 1.5;
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.48));
+}
+
+.mindmap-node-central {
+    fill: rgba(0,0,0,0.88);
+}
+
+.mindmap-text {
+    font-family: Ubuntu, Arial, sans-serif;
+    font-size: 13px;
+    fill: #222;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+}
+
+.mindmap-text-central {
+    fill: #fff;
+    font-size: 15px;
+    font-weight: bold;
+}
+
 #result-window {
     position: fixed;
     top: 50%;
@@ -99,13 +142,14 @@ body {
 }
 
 #result-window.expanded {
-    min-height: 120px;
-    max-height: 52vh;
-    padding: 26px 32px;
+    top: 18%;
+    min-height: 90px;
+    max-height: 24vh;
+    padding: 22px 28px;
 }
 
 #result-content {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.65;
     white-space: pre-wrap;
     text-align: justify;
@@ -248,7 +292,7 @@ body {
     }
 
     #result-content {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     #hint {
@@ -270,6 +314,10 @@ body {
 
 <div id="stage">
     <div id="world"></div>
+</div>
+
+<div id="mindmap-window">
+    <svg id="mindmap-svg"></svg>
 </div>
 
 <div id="hint">{{ app_name }}</div>
@@ -507,6 +555,133 @@ function pintarEmbedding(values) {
     updateBillboards();
 }
 
+function limpiarMindmap() {
+    const svg = document.getElementById("mindmap-svg");
+    svg.innerHTML = "";
+}
+
+function limitarTexto(texto, max = 34) {
+    texto = String(texto || "");
+
+    if (texto.length <= max) {
+        return texto;
+    }
+
+    return texto.slice(0, max - 3) + "...";
+}
+
+function contarNodos(nodos) {
+    if (!Array.isArray(nodos)) {
+        return 0;
+    }
+
+    let total = nodos.length;
+
+    nodos.forEach(nodo => {
+        total += contarNodos(nodo.nodos || []);
+    });
+
+    return total;
+}
+
+function dibujarLinea(svg, x1, y1, x2, y2) {
+    const linea = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    linea.setAttribute("x1", x1);
+    linea.setAttribute("y1", y1);
+    linea.setAttribute("x2", x2);
+    linea.setAttribute("y2", y2);
+    linea.setAttribute("class", "mindmap-line");
+
+    svg.insertBefore(linea, svg.firstChild);
+}
+
+function dibujarNodo(svg, nodo, x, y, radio, central = false) {
+    const grupo = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+    const circulo = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circulo.setAttribute("cx", x);
+    circulo.setAttribute("cy", y);
+    circulo.setAttribute("r", radio);
+    circulo.setAttribute("class", central ? "mindmap-node mindmap-node-central" : "mindmap-node");
+
+    const texto = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    texto.setAttribute("x", x);
+    texto.setAttribute("y", y);
+    texto.setAttribute("class", central ? "mindmap-text mindmap-text-central" : "mindmap-text");
+    texto.textContent = limitarTexto(nodo.titulo || "Nodo", central ? 38 : 30);
+
+    grupo.appendChild(circulo);
+    grupo.appendChild(texto);
+    svg.appendChild(grupo);
+}
+
+function dibujarRama(svg, nodo, x, y, nivel, anguloInicio, anguloFin) {
+    const hijos = Array.isArray(nodo.nodos) ? nodo.nodos : [];
+
+    if (hijos.length === 0) {
+        return;
+    }
+
+    const distancia = 125 + nivel * 48;
+    const radioNodo = Math.max(30, 52 - nivel * 6);
+    const totalPeso = hijos.reduce((suma, hijo) => {
+        return suma + Math.max(1, contarNodos(hijo.nodos || []) + 1);
+    }, 0);
+
+    let anguloActual = anguloInicio;
+
+    hijos.forEach(hijo => {
+        const peso = Math.max(1, contarNodos(hijo.nodos || []) + 1);
+        const proporcion = peso / totalPeso;
+        const rango = (anguloFin - anguloInicio) * proporcion;
+        const angulo = anguloActual + rango / 2;
+
+        const hijoX = x + Math.cos(angulo) * distancia;
+        const hijoY = y + Math.sin(angulo) * distancia;
+
+        dibujarLinea(svg, x, y, hijoX, hijoY);
+        dibujarNodo(svg, hijo, hijoX, hijoY, radioNodo, false);
+
+        dibujarRama(
+            svg,
+            hijo,
+            hijoX,
+            hijoY,
+            nivel + 1,
+            anguloActual,
+            anguloActual + rango
+        );
+
+        anguloActual += rango;
+    });
+}
+
+function renderMindmap(mindmap) {
+    limpiarMindmap();
+
+    if (!mindmap) {
+        return;
+    }
+
+    const svg = document.getElementById("mindmap-svg");
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+
+    const cx = width / 2;
+    const cy = height / 2 + 40;
+
+    const raiz = {
+        titulo: mindmap.titulo || "Resultado",
+        descripcion: mindmap.resumen || "",
+        nodos: Array.isArray(mindmap.nodos) ? mindmap.nodos : []
+    };
+
+    dibujarNodo(svg, raiz, cx, cy, 68, true);
+    dibujarRama(svg, raiz, cx, cy, 1, -Math.PI, Math.PI);
+}
+
 function ocultarResultado() {
     if (writingTimer) {
         clearInterval(writingTimer);
@@ -515,6 +690,8 @@ function ocultarResultado() {
 
     resultWindow.classList.remove("visible", "loading", "expanded");
     resultContent.innerHTML = "";
+
+    limpiarMindmap();
 }
 
 function mostrarCargando() {
@@ -529,7 +706,7 @@ function mostrarCargando() {
     resultContent.innerHTML = `
         <div class="loading-row">
             <div class="spinner"></div>
-            <div>Generando respuesta...</div>
+            <div>Generando mapa mental...</div>
         </div>
     `;
 }
@@ -598,8 +775,13 @@ async function obtenerEmbedding(texto) {
 async function previsualizarEmbedding() {
     const texto = inputTexto.value.trim();
 
-    if (!texto) return;
-    if (texto === lastPreviewText) return;
+    if (!texto) {
+        return;
+    }
+
+    if (texto === lastPreviewText) {
+        return;
+    }
 
     if (previewBusy) {
         pendingPreview = true;
@@ -639,7 +821,9 @@ function programarPreviewEmbedding() {
 async function consultar() {
     const texto = inputTexto.value.trim();
 
-    if (!texto) return;
+    if (!texto) {
+        return;
+    }
 
     clearTimeout(previewTimer);
 
@@ -668,7 +852,9 @@ async function consultar() {
 
         const data = await response.json();
 
-        info.textContent = `"${texto}" · respuesta generada`;
+        renderMindmap(data.mindmap);
+
+        info.textContent = `"${texto}" · mapa mental generado`;
 
         escribirRespuesta(data.respuesta || "No se obtuvo respuesta.");
 
@@ -703,7 +889,9 @@ window.addEventListener("mouseup", () => {
 });
 
 window.addEventListener("mousemove", e => {
-    if (!dragging) return;
+    if (!dragging) {
+        return;
+    }
 
     const dx = e.clientX - lastMouseX;
     const dy = e.clientY - lastMouseY;

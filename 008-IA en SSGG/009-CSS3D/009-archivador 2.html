@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drawer Cube with Side Detach</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f0f0f0;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+    user-select:none;
+}
+
+.drawer-container{
+    position:relative;
+    width:260px;
+    height:260px;
+    perspective:1000px;
+}
+
+.drawer{
+    position:absolute;
+    width:100%;
+    height:100%;
+    transform-style:preserve-3d;
+    transition:transform 0.1s linear;
+}
+
+.square{
+    position:absolute;
+    left:40px;
+    top:40px;
+    width:180px;
+    height:180px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+
+    border:2px solid rgba(0,0,0,0.45);
+    box-shadow:0 18px 35px rgba(0,0,0,0.25);
+
+    transform-style:preserve-3d;
+    transition:
+        transform 0.7s cubic-bezier(.2,.8,.2,1),
+        opacity 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+.square.detached{
+    transform:translateX(260px) translateZ(40px) rotateY(-25deg) !important;
+    opacity:0.92;
+    z-index:20;
+    box-shadow:0 30px 60px rgba(0,0,0,0.35);
+}
+</style>
+</head>
+
+<body>
+
+<div class="drawer-container">
+    <div class="drawer" id="drawer">
+        <div class="square" style="transform:translateZ(0px);   background:rgba(255,0,0,0.82);">File 1</div>
+        <div class="square" style="transform:translateZ(-25px); background:rgba(0,180,80,0.82);">File 2</div>
+        <div class="square" style="transform:translateZ(-50px); background:rgba(0,80,255,0.82);">File 3</div>
+        <div class="square" style="transform:translateZ(-75px); background:rgba(230,190,0,0.82);">File 4</div>
+        <div class="square" style="transform:translateZ(-100px);background:rgba(210,0,210,0.82);">File 5</div>
+    </div>
+</div>
+
+<script>
+const drawer = document.getElementById("drawer");
+const squares = document.querySelectorAll(".square");
+
+let rotX = -15;
+let rotY = 25;
+
+let dragging = false;
+let lastX = 0;
+let lastY = 0;
+let moved = false;
+
+function updateCamera(){
+    drawer.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+}
+
+updateCamera();
+
+document.addEventListener("mousedown", e => {
+    dragging = true;
+    moved = false;
+    lastX = e.clientX;
+    lastY = e.clientY;
+});
+
+document.addEventListener("mousemove", e => {
+    if(!dragging) return;
+
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+
+    if(Math.abs(dx) > 2 || Math.abs(dy) > 2){
+        moved = true;
+    }
+
+    rotY += dx * 0.35;
+    rotX -= dy * 0.35;
+
+    rotX = Math.max(-80, Math.min(80, rotX));
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    updateCamera();
+});
+
+document.addEventListener("mouseup", () => {
+    dragging = false;
+});
+
+squares.forEach(square => {
+    square.addEventListener("click", e => {
+        e.stopPropagation();
+
+        if(moved) return;
+
+        square.classList.toggle("detached");
+    });
+});
+</script>
+
+</body>
+</html>

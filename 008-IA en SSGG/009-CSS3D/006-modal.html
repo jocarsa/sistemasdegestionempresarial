@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS3D Text Containers</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:white;
+    width:100vw;
+    height:100vh;
+    position:relative;
+    font-family:Arial,sans-serif;
+    perspective:1200px;
+}
+
+#scene{
+    position:absolute;
+    width:100%;
+    height:100%;
+    transform-style:preserve-3d;
+    transition:filter .5s, opacity .5s;
+}
+
+#scene.blurred{
+    filter:blur(10px);
+    opacity:.25;
+}
+
+.decor{
+    position:absolute;
+    padding:22px;
+    border-radius:24px;
+    color:#111827;
+    font-size:15px;
+    line-height:1.45;
+    font-weight:400;
+    background:rgba(255,255,255,0.28);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,0.55);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.65);
+    transform-style:preserve-3d;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.decor h2{
+    margin:0 0 10px 0;
+    font-size:20px;
+    font-weight:700;
+}
+
+.decor p{
+    margin:0;
+    opacity:0.75;
+}
+
+#expanded{
+    position:fixed;
+    z-index:9999;
+    padding:50px;
+    border-radius:24px;
+    color:#111827;
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(28px);
+    -webkit-backdrop-filter:blur(28px);
+    border:1px solid rgba(255,255,255,0.75);
+    box-shadow:0 40px 120px rgba(0,0,0,.25);
+    overflow:hidden;
+    display:none;
+    transition:all .75s cubic-bezier(.22,1,.36,1);
+}
+
+#expanded.active{
+    left:30px !important;
+    top:30px !important;
+    width:calc(100vw - 160px) !important;
+    height:calc(100vh - 160px) !important;
+    border-radius:34px;
+}
+
+#expanded h2{
+    margin:0 0 20px 0;
+    font-size:54px;
+    letter-spacing:-0.05em;
+}
+
+#expanded p{
+    font-size:25px;
+    line-height:1.6;
+    max-width:900px;
+}
+
+#close{
+    position:absolute;
+    top:24px;
+    right:32px;
+    font-size:42px;
+    cursor:pointer;
+    opacity:.55;
+}
+</style>
+</head>
+
+<body>
+
+<div id="scene"></div>
+
+<div id="expanded">
+    <div id="close">×</div>
+    <h2></h2>
+    <p></p>
+</div>
+
+<script>
+const scene = document.getElementById("scene");
+const expanded = document.getElementById("expanded");
+const closeBtn = document.getElementById("close");
+
+const titles = [
+    "Digital Horizon",
+    "Creative System",
+    "Visual Layer",
+    "Soft Interface",
+    "Floating Content",
+    "Elegant Module",
+    "Data Surface",
+    "Design Panel"
+];
+
+const texts = [
+    "A translucent container floating gently in a layered digital space.",
+    "Depth, light and transparency combine to create a clean visual system.",
+    "Each card behaves like a small fragment of information inside the scene.",
+    "The interface keeps the original simplicity while adding spatial depth.",
+    "Soft shadows and blur create a refined glass-like visual effect.",
+    "Random content appears distributed through a subtle three-dimensional layout."
+];
+
+for(let i = 0; i < 60; i++){
+
+    const div = document.createElement("div");
+    div.className = "decor";
+
+    const w = 180 + Math.random() * 180;
+    const h = 110 + Math.random() * 90;
+
+    div.style.width = w + "px";
+    div.style.minHeight = h + "px";
+
+    div.style.left = (Math.random() * window.innerWidth - w / 2) * 2 + "px";
+    div.style.top = (Math.random() * window.innerHeight - h / 2) * 2 + "px";
+
+    const z = -20000 + Math.random() * 20000;
+    div.style.transform = `translateZ(${z}px)`;
+
+    const title = titles[Math.floor(Math.random() * titles.length)];
+    const text = texts[Math.floor(Math.random() * texts.length)];
+
+    div.innerHTML = `
+        <h2>${title}</h2>
+        <p>${text}</p>
+    `;
+
+    div.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        const rect = div.getBoundingClientRect();
+
+        expanded.style.display = "block";
+        expanded.classList.remove("active");
+
+        expanded.style.left = rect.left + "px";
+        expanded.style.top = rect.top + "px";
+        expanded.style.width = rect.width + "px";
+        expanded.style.height = rect.height + "px";
+
+        expanded.querySelector("h2").textContent = title;
+        expanded.querySelector("p").textContent = text;
+
+        scene.classList.add("blurred");
+
+        requestAnimationFrame(() => {
+            expanded.classList.add("active");
+        });
+    });
+
+    scene.appendChild(div);
+}
+
+function closeExpanded(){
+    expanded.classList.remove("active");
+    scene.classList.remove("blurred");
+
+    setTimeout(() => {
+        expanded.style.display = "none";
+    }, 500);
+}
+
+closeBtn.addEventListener("click", closeExpanded);
+
+document.addEventListener("keydown", e => {
+    if(e.key === "Escape") closeExpanded();
+});
+
+let cameraX = 0;
+let cameraY = 0;
+let cameraZ = 0;
+
+document.addEventListener("mousemove",(e)=>{
+    cameraX = (e.clientX / window.innerWidth - 0.5) * 1000;
+    cameraY = (e.clientY / window.innerHeight - 0.5) * 1000;
+    updateCamera();
+});
+
+document.addEventListener("wheel",(e)=>{
+    cameraZ += e.deltaY;
+    updateCamera();
+});
+
+function updateCamera(){
+    scene.style.transform = `
+        translate3d(${-cameraX}px, ${-cameraY}px, ${cameraZ}px)
+    `;
+}
+</script>
+
+</body>
+</html>

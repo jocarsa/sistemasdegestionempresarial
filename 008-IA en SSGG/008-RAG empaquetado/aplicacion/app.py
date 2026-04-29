@@ -3,6 +3,8 @@
 
 import os
 import uuid
+import json
+import re
 import sqlite3
 import requests
 import subprocess
@@ -10,6 +12,7 @@ import tempfile
 
 from pathlib import Path
 from datetime import datetime
+
 from flask import Flask, request, redirect, session, render_template, jsonify
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -96,23 +99,63 @@ def extension_valida(nombre_archivo):
     return Path(nombre_archivo).suffix.lower() in EXTENSIONES_PERMITIDAS
 
 
+def extraer_json_desde_texto(texto):
+    texto = texto.strip()
+
+    try:
+        return json.loads(texto)
+    except Exception:
+        pass
+
+    match = re.search(r"\{.*\}", texto, re.DOTALL)
+
+    if match:
+        try:
+            return json.loads(match.group(0))
+        except Exception:
+            pass
+
+    return None
+
+
 def generar_respuesta_con_ollama(consulta, fragmentos):
     contexto = "\n\n".join(fragmentos)
 
     prompt = f"""
-Responde en español, en un solo párrafo, con lenguaje natural, claro y directo.
+Responde exclusivamente con JSON válido.
+
+No uses markdown.
+No expliques nada fuera del JSON.
+
+La estructura debe ser exactamente de este tipo:
+
+{{
+  "titulo": "Título central breve",
+  "resumen": "Resumen breve en un párrafo",
+  "nodos": [
+    {{
+      "titulo": "Idea principal",
+      "descripcion": "Descripción breve",
+      "nodos": [
+        {{
+          "titulo": "Subidea",
+          "descripcion": "Descripción breve",
+          "nodos": []
+        }}
+      ]
+    }}
+  ]
+}}
 
 Usa principalmente el contexto recuperado mediante RAG.
 No inventes información que no esté en el contexto.
-Si el contexto no contiene suficiente información, dilo claramente.
+Si el contexto no contiene suficiente información, crea un mapa pequeño indicando que falta información.
 
 Pregunta del usuario:
 {consulta}
 
 Contexto recuperado:
 {contexto}
-
-Respuesta:
 """.strip()
 
     response = requests.post(
@@ -128,7 +171,26 @@ Respuesta:
     response.raise_for_status()
     data = response.json()
 
-    return data.get("response", "").strip()
+    texto = data.get("response", "").strip()
+    estructura = extraer_json_desde_texto(texto)
+
+    if estructura is None:
+        estructura = {
+            "titulo": consulta,
+            "resumen": texto if texto else "No se ha podido generar una estructura válida.",
+            "nodos": []
+        }
+
+    if "titulo" not in estructura:
+        estructura["titulo"] = consulta
+
+    if "resumen" not in estructura:
+        estructura["resumen"] = ""
+
+    if "nodos" not in estructura or not isinstance(estructura["nodos"], list):
+        estructura["nodos"] = []
+
+    return estructura
 
 
 def init_db():
@@ -384,6 +446,7 @@ def variables_globales():
 def index():
     return render_template("chat.html")
 
+
 @app.route("/api/embed", methods=["POST"])
 def api_embed():
     data = request.get_json()
@@ -408,7 +471,8 @@ def api_embed():
             "status": "error",
             "message": str(e)
         })
-        
+
+
 @app.route("/api/chat", methods=["POST"])
 def api_chat():
     data = request.get_json()
@@ -416,7 +480,12 @@ def api_chat():
 
     if not consulta:
         return jsonify({
-            "respuesta": "No has enviado ninguna consulta."
+            "respuesta": "No has enviado ninguna consulta.",
+            "mindmap": {
+                "titulo": "Sin consulta",
+                "resumen": "No has enviado ninguna consulta.",
+                "nodos": []
+            }
         })
 
     conn = conectar()
@@ -433,7 +502,12 @@ def api_chat():
 
     if not entrenamiento:
         return jsonify({
-            "respuesta": "Todavía no hay ninguna indexación disponible."
+            "respuesta": "Todavía no hay ninguna indexación disponible.",
+            "mindmap": {
+                "titulo": "Sin indexación",
+                "resumen": "Todavía no hay ninguna indexación disponible.",
+                "nodos": []
+            }
         })
 
     try:
@@ -451,24 +525,34 @@ def api_chat():
 
         if not documentos:
             return jsonify({
-                "respuesta": "No he encontrado información relacionada en los documentos indexados."
+                "respuesta": "No he encontrado información relacionada en los documentos indexados.",
+                "mindmap": {
+                    "titulo": "Sin resultados",
+                    "resumen": "No he encontrado información relacionada en los documentos indexados.",
+                    "nodos": []
+                }
             })
 
-        respuesta = generar_respuesta_con_ollama(
+        mindmap = generar_respuesta_con_ollama(
             consulta=consulta,
             fragmentos=documentos
         )
 
-        if not respuesta:
-            respuesta = "He encontrado información relacionada, pero no he podido generar una respuesta redactada."
-
         return jsonify({
-            "respuesta": respuesta
+            "respuesta": mindmap.get("resumen", ""),
+            "mindmap": mindmap
         })
 
     except Exception as e:
+        mensaje = "Error consultando el sistema RAG: " + str(e)
+
         return jsonify({
-            "respuesta": "Error consultando el sistema RAG: " + str(e)
+            "respuesta": mensaje,
+            "mindmap": {
+                "titulo": "Error",
+                "resumen": mensaje,
+                "nodos": []
+            }
         })
 
 

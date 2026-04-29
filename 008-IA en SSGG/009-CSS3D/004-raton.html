@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS3D Camera</title>
+
+<style>
+
+    body{
+        margin:0;
+        overflow:hidden;
+        background:white;
+        width:100vw;
+        height:100vh;
+        position:relative;
+        font-family:Arial,sans-serif;
+
+        perspective:1200px;
+        transform-style:preserve-3d;
+    }
+
+    #scene{
+        position:absolute;
+        width:100%;
+        height:100%;
+        transform-style:preserve-3d;
+    }
+
+    .decor{
+        position:absolute;
+        transition:transform 0.2s;
+        transform-style:preserve-3d;
+    }
+
+</style>
+</head>
+<body>
+
+<div id="scene"></div>
+
+<script>
+
+const scene = document.getElementById("scene");
+
+const colors = [
+    "rgba(99,102,241,1)",
+    "rgba(236,72,153,1)",
+    "rgba(59,130,246,1)",
+    "rgba(16,185,129,1)",
+    "rgba(245,158,11,1)"
+];
+
+for(let i = 0; i < 60; i++){
+
+    const div = document.createElement("div");
+    div.className = "decor";
+
+    const size = 40 + Math.random() * 180;
+
+    div.style.width = size + "px";
+    div.style.height = size + "px";
+
+    div.style.left =
+        (Math.random() * window.innerWidth - size/2) + "px";
+
+    div.style.top =
+        (Math.random() * window.innerHeight - size/2) + "px";
+
+    div.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    const z = -1000 + Math.random() * 2000;
+
+    div.dataset.z = z;
+
+    div.style.transform =
+        `translateZ(${z}px)`;
+
+    scene.appendChild(div);
+}
+
+let cameraX = 0;
+let cameraY = 0;
+let cameraZ = 0;
+
+document.addEventListener("mousemove",(e)=>{
+
+    cameraX =
+        (e.clientX / window.innerWidth - 0.5) * 1000;
+
+    cameraY =
+        (e.clientY / window.innerHeight - 0.5) * 1000;
+
+    updateCamera();
+});
+
+document.addEventListener("wheel",(e)=>{
+
+    cameraZ += e.deltaY;
+
+    updateCamera();
+});
+
+function updateCamera(){
+
+    scene.style.transform =
+        `
+        translate3d(
+            ${-cameraX}px,
+            ${-cameraY}px,
+            ${cameraZ}px
+        )
+        `;
+}
+
+</script>
+
+</body>
+</html>
