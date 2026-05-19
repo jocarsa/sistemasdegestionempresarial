@@ -100,6 +100,7 @@
   - [RAG mas IA](#rag-mas-ia)
   - [Repaso deploy](#repaso-deploy)
   - [RAG empaquetado](#rag-empaquetado)
+  - [CSS3D](#css3d)
 - [.git](#git)
   - [branches](#branches)
   - [hooks](#hooks)
@@ -6836,6 +6837,12 @@ echo "El gato tiene ".$gato1->getEdad()." años";
 ## RAG empaquetado
 
 [📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/008-RAG%20empaquetado)
+
+
+<a id="css3d"></a>
+## CSS3D
+
+[📁 Ver carpeta en GitHub](https://github.com/jocarsa/sistemasdegestionempresarial/tree/main/008-IA%20en%20SSGG/009-CSS3D)
 
 
 

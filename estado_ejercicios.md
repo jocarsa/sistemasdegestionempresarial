@@ -1,6 +1,6 @@
 # sistemasdegestionempresarial — Estado de ejercicios
 
-Generado: 2026-04-29 15:00
+Generado: 2026-05-19 15:00
 
 ---
 
@@ -125,3 +125,4 @@ Generado: 2026-04-29 15:00
 - 🔴 RAG mas IA
 - 🔴 Repaso deploy
 - 🔴 RAG empaquetado
+- 🔴 CSS3D
